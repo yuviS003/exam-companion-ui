@@ -1,5 +1,6 @@
 import { darkLogo, lightLogo } from "../../assets";
 import lightTheme from "../../themes/lightTheme";
+import PropTypes from "prop-types";
 
 const Logo = ({ currentTheme, className }) => {
   return (
@@ -9,6 +10,11 @@ const Logo = ({ currentTheme, className }) => {
       className={className}
     />
   );
+};
+
+Logo.propTypes = {
+  currentTheme: PropTypes.object.isRequired,
+  className: PropTypes.string,
 };
 
 export default Logo;

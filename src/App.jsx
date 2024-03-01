@@ -6,9 +6,14 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Footer from "./components/Footer/Footer";
+import GlobalLoader from "./components/Loaders/GlobalLoader";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Homepage from "./pages/Homepage/Homepage";
 
 const App = () => {
-  const [currentTheme, setCurrentTheme] = useState(lightTheme);
+  const [currentTheme, setCurrentTheme] = useState(darkTheme);
+  const [globalLoaderStatus, setGlobalLoaderStatus] = useState(false);
+  const [globalLoaderText, setGlobalLoaderText] = useState("Loading");
 
   const toggleCurrentTheme = () => {
     setCurrentTheme((prevTheme) =>
@@ -22,11 +27,12 @@ const App = () => {
       {/* Your App Components Here */}
       <Routes>
         <Route
-          index
+          path="login"
           element={
             <Login
-              toggleCurrentTheme={toggleCurrentTheme}
               currentTheme={currentTheme}
+              setGlobalLoaderText={setGlobalLoaderText}
+              setGlobalLoaderStatus={setGlobalLoaderStatus}
             />
           }
         />
@@ -34,16 +40,41 @@ const App = () => {
           path="/signup"
           element={
             <Signup
-              toggleCurrentTheme={toggleCurrentTheme}
               currentTheme={currentTheme}
+              setGlobalLoaderText={setGlobalLoaderText}
+              setGlobalLoaderStatus={setGlobalLoaderStatus}
             />
           }
         />
+        <Route
+          path="/"
+          element={
+            <Dashboard
+              currentTheme={currentTheme}
+              setGlobalLoaderText={setGlobalLoaderText}
+              setGlobalLoaderStatus={setGlobalLoaderStatus}
+            />
+          }
+        >
+          <Route
+            index
+            element={
+              <Homepage
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+              />
+            }
+          />
+        </Route>
       </Routes>
       <Footer
         toggleCurrentTheme={toggleCurrentTheme}
         currentTheme={currentTheme}
       />
+      {globalLoaderStatus && (
+        <GlobalLoader globalLoaderText={globalLoaderText} />
+      )}
     </ThemeProvider>
   );
 };

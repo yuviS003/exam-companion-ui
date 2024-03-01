@@ -1,4 +1,5 @@
 import { useReducer, useContext, createContext } from "react";
+import PropTypes from "prop-types";
 
 // Create a context
 const SuperContext = createContext();
@@ -38,4 +39,8 @@ export const SuperContextProvider = ({ children }) => {
       {children}
     </SuperContext.Provider>
   );
+};
+
+SuperContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
