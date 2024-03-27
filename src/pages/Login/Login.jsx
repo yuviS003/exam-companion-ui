@@ -54,7 +54,7 @@ const Login = ({
 
   return (
     <div className="flex items-start justify-center h-[90vh] pt-24">
-      <Paper elevation={7} className="py-12 px-10 max-w-md w-full md:max-w-lg">
+      <Paper elevation={7} className="py-12 px-10 max-w-md w-full">
         <Logo
           currentTheme={currentTheme}
           className="mx-auto mb-4 w-[200px] bg-cover"

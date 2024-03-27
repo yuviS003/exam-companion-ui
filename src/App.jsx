@@ -11,7 +11,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Homepage from "./pages/Homepage/Homepage";
 
 const App = () => {
-  const [currentTheme, setCurrentTheme] = useState(darkTheme);
+  const [currentTheme, setCurrentTheme] = useState(lightTheme);
   const [globalLoaderStatus, setGlobalLoaderStatus] = useState(false);
   const [globalLoaderText, setGlobalLoaderText] = useState("Loading");
 
