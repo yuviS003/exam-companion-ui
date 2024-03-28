@@ -53,7 +53,7 @@ const Features = () => {
         Everything you need to create a form
       </span>
       <span className="text-xl">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        Simplifying your workflow with forms is now easier than ever.
       </span>
       <div className="my-10 px-6  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-20">
         {features.map((_feat, i) => (
