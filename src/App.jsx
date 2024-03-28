@@ -27,7 +27,17 @@ const App = () => {
       {/* Your App Components Here */}
       <Routes>
         <Route
-          path="login"
+          index
+          element={
+            <Homepage
+              currentTheme={currentTheme}
+              setGlobalLoaderText={setGlobalLoaderText}
+              setGlobalLoaderStatus={setGlobalLoaderStatus}
+            />
+          }
+        />
+        <Route
+          path="/login"
           element={
             <Login
               currentTheme={currentTheme}
@@ -47,7 +57,7 @@ const App = () => {
           }
         />
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <Dashboard
               currentTheme={currentTheme}
@@ -56,16 +66,7 @@ const App = () => {
             />
           }
         >
-          <Route
-            index
-            element={
-              <Homepage
-                currentTheme={currentTheme}
-                setGlobalLoaderText={setGlobalLoaderText}
-                setGlobalLoaderStatus={setGlobalLoaderStatus}
-              />
-            }
-          />
+          <Route index element={<>Create/view all forms</>} />
         </Route>
       </Routes>
       <Footer

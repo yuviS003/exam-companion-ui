@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
-import styles from "../../styles";
-import Logo from "../Logo/Logo";
+import styles from "../../../styles";
+import Logo from "../../Logo/Logo";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";

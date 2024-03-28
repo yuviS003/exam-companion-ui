@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { heroImg } from "../../assets";
+import { heroImg } from "../../../assets";
 
 const Hero = () => {
   return (
