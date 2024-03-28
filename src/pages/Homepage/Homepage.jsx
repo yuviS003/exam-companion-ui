@@ -1,3 +1,4 @@
+import Footer from "../../components/Footer/Footer";
 import AboutTeam from "../../components/User/AboutTeam/AboutTeam";
 import Contact from "../../components/User/Contact/Contact";
 import Features from "../../components/User/Features/Features";
@@ -7,7 +8,7 @@ import Navbar from "../../components/User/Navbar/Navbar";
 import Tutorial from "../../components/User/Tutorial/Tutorial";
 import styles from "../../styles";
 
-const Homepage = ({ currentTheme }) => {
+const Homepage = ({ currentTheme, toggleCurrentTheme }) => {
   return (
     <>
       <Navbar currentTheme={currentTheme} />
@@ -19,6 +20,10 @@ const Homepage = ({ currentTheme }) => {
         <Contact />
         <HeroBottomBanner />
       </div>
+      <Footer
+        toggleCurrentTheme={toggleCurrentTheme}
+        currentTheme={currentTheme}
+      />
     </>
   );
 };

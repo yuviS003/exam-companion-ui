@@ -5,10 +5,11 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
-import Footer from "./components/Footer/Footer";
 import GlobalLoader from "./components/Loaders/GlobalLoader";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Homepage from "./pages/Homepage/Homepage";
+import { SnackbarProvider } from "notistack";
+import Overview from "./components/UserDashboard/Overview";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -23,6 +24,12 @@ const App = () => {
 
   return (
     <ThemeProvider theme={currentTheme}>
+      <SnackbarProvider
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        transitionDuration={200}
+        autoHideDuration={1000}
+        preventDuplicate={true}
+      />
       <CssBaseline />
       {/* Your App Components Here */}
       <Routes>
@@ -33,6 +40,7 @@ const App = () => {
               currentTheme={currentTheme}
               setGlobalLoaderText={setGlobalLoaderText}
               setGlobalLoaderStatus={setGlobalLoaderStatus}
+              toggleCurrentTheme={toggleCurrentTheme}
             />
           }
         />
@@ -66,13 +74,10 @@ const App = () => {
             />
           }
         >
-          <Route index element={<>Create/view all forms</>} />
+          <Route index element={<Overview />} />
         </Route>
       </Routes>
-      <Footer
-        toggleCurrentTheme={toggleCurrentTheme}
-        currentTheme={currentTheme}
-      />
+
       {globalLoaderStatus && (
         <GlobalLoader globalLoaderText={globalLoaderText} />
       )}
