@@ -3,7 +3,10 @@ import { heroImg } from "../../assets";
 
 const Hero = () => {
   return (
-    <div className="min-h-[90vh] px-20 flex items-center justify-center gap-20">
+    <div
+      id="hero"
+      className="min-h-[90vh] px-20 flex items-center justify-center gap-20"
+    >
       <div className="flex flex-col gap-10 max-w-[650px]">
         <span className="text-6xl font-bold">
           Simplify, Customize, Excel Together

@@ -3,6 +3,7 @@ import styles from "../../styles";
 import Logo from "../Logo/Logo";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-scroll";
 
 const Navbar = ({ currentTheme }) => {
   const navigate = useNavigate();
@@ -12,19 +13,25 @@ const Navbar = ({ currentTheme }) => {
 
   return (
     <div
-      className={`${styles.sectionPaddingX} flex justify-between items-center py-6 border-b border-gray-300 dark:border-b-0`}
+      className={`${styles.sectionPaddingX} sticky bg-white top-0 left-0 z-[100] flex justify-between items-center py-6`}
     >
       <Logo currentTheme={currentTheme} className="w-[120px] bg-cover" />
 
       {/* NavLinks */}
       <div className="flex items-center justify-center gap-10">
         {["Tutorial", "About", "Contact"].map((navText, i) => (
-          <span
+          <Link
+            activeClass="active"
+            to={navText}
+            spy={true}
+            smooth={true}
+            offset={-100}
+            duration={500}
             key={i}
             className="text-slate-500 cursor-pointer hover:text-slate-800 active:text-slate-800 transition"
           >
             {navText}
-          </span>
+          </Link>
         ))}
       </div>
 

@@ -9,9 +9,13 @@ import styles from "../../styles";
 const Footer = ({ currentTheme, toggleCurrentTheme }) => {
   return (
     <div
-      className={`h-[10vh] ${styles.sectionPaddingX} flex justify-between items-center`}
+      className={`h-[15vh] ${styles.sectionPaddingX} flex justify-between items-center`}
     >
       <Logo currentTheme={currentTheme} className="w-[80px] bg-cover" />
+      <span className="text-gray-400 tracking-wider text-sm text-center">
+        Copyright © 2024 Quizzo. <br />
+        All rights reserved.
+      </span>
       <IconButton aria-label="delete" size="small" onClick={toggleCurrentTheme}>
         {currentTheme === lightTheme ? (
           <LightModeIcon fontSize="inherit" />
