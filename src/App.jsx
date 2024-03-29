@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Homepage from "./pages/Homepage/Homepage";
 import { SnackbarProvider } from "notistack";
 import Overview from "./components/UserDashboard/Overview";
+import FormEditor from "./components/UserDashboard/FormEditor";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -51,6 +52,7 @@ const App = () => {
               currentTheme={currentTheme}
               setGlobalLoaderText={setGlobalLoaderText}
               setGlobalLoaderStatus={setGlobalLoaderStatus}
+              toggleCurrentTheme={toggleCurrentTheme}
             />
           }
         />
@@ -61,6 +63,7 @@ const App = () => {
               currentTheme={currentTheme}
               setGlobalLoaderText={setGlobalLoaderText}
               setGlobalLoaderStatus={setGlobalLoaderStatus}
+              toggleCurrentTheme={toggleCurrentTheme}
             />
           }
         />
@@ -75,6 +78,7 @@ const App = () => {
           }
         >
           <Route index element={<Overview />} />
+          <Route path="form_editor" element={<FormEditor />} />
         </Route>
       </Routes>
 

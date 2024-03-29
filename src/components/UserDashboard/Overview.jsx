@@ -1,9 +1,22 @@
 import { Button } from "@mui/material";
 import axios from "axios";
+import ReactPlayer from "react-player";
+import { FaDownload } from "react-icons/fa";
+import { useEffect, useState } from "react";
+
+const formCreationSteps = [
+  "Download the form template and fill it with your questions.",
+  "Upload the template.",
+  "Review your questionnaire in our automated form editor.",
+  "Publish your questionnaire and share the link with your audience.",
+  "View the response.",
+];
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const Overview = () => {
+  const [currentAuthUser, setCurrentAuthUser] = useState(null);
+
   const downloadFreshFormTemplate = () => {
     let config = {
       method: "get",
@@ -27,7 +40,7 @@ const Overview = () => {
         // Create a download link
         const downloadLink = document.createElement("a");
         downloadLink.href = window.URL.createObjectURL(blob);
-        downloadLink.setAttribute("download", "filename"); // Set desired file name here
+        downloadLink.setAttribute("download", `${currentAuthUser?.name}_form.xlsx`); // Set desired file name here
         downloadLink.click();
       })
       .catch((error) => {
@@ -35,42 +48,57 @@ const Overview = () => {
       });
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append("file", file);
-
-    axios
-      .post(`${apiUrl}/api/excel/uploadFormTemplate`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Bearer your_token_here",
-        },
-      })
-      .then((response) => {
-        console.log("File uploaded successfully:", response.data);
-        // Add any further logic here after successful file upload
-      })
-      .catch((error) => {
-        console.error("Error uploading file:", error);
-      });
-  };
+  useEffect(() => {
+    if (localStorage.getItem("quizzo_current_user")) {
+      setCurrentAuthUser(
+        JSON.parse(localStorage.getItem("quizzo_current_user"))
+      );
+    }
+  }, []);
 
   return (
-    <div className="min-h-[70vh]">
-      <Button onClick={downloadFreshFormTemplate}>
-        Download Fresh Form Template
-      </Button>
-      <input
-        type="file"
-        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-        onChange={handleFileUpload}
-        style={{ display: "none" }}
-        id="file-upload"
-      />
-      <label htmlFor="file-upload">
-        <Button component="span">Upload Form Template</Button>
-      </label>
+    <div className="p-10 flex flex-col">
+      <span className="text-4xl mb-2">
+        Hi, {currentAuthUser?.name}
+      </span>
+      <div className="w-full flex items-center justify-between">
+        <p className="text-sm">What are we doing today?</p>
+        <p>
+          <i>Total Quizzes: 0</i>
+        </p>
+      </div>
+      <div className="w-full flex items-start justify-between pt-8 pb-14">
+        <div className="flex flex-col w-1/2 text-lg leading-loose">
+          <p className="text-xl">How easy is it to create a form?</p>
+          <ol className="pl-8 list-decimal">
+            {formCreationSteps.map((_steps, i) => (
+              <li key={i}>{_steps}</li>
+            ))}
+          </ol>
+        </div>
+        <div className="w-1/2 flex items-center justify-center">
+          <ReactPlayer
+            url="path_to_your_video.mp4"
+            controls
+            width="500px"
+            height="100%"
+          />
+        </div>
+      </div>
+      <div className="w-fit flex items-center justify-center gap-5">
+        <Button
+          variant="contained"
+          onClick={downloadFreshFormTemplate}
+          sx={{
+            backgroundColor: "#4338CA",
+            fontSize: 15,
+            "&:hover": { backgroundColor: "#4338CA" },
+          }}
+          startIcon={<FaDownload />}
+        >
+          Download Fresh Form Template
+        </Button>
+      </div>
     </div>
   );
 };

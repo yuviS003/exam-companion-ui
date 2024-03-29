@@ -19,7 +19,7 @@ const Navbar = ({ currentTheme }) => {
 
       {/* NavLinks */}
       <div className="flex items-center justify-center gap-10">
-        {["Tutorial", "About", "Contact"].map((navText, i) => (
+        {["Features", "Tutorial", "About", "Contact"].map((navText, i) => (
           <Link
             activeClass="active"
             to={navText}
@@ -52,6 +52,7 @@ const Navbar = ({ currentTheme }) => {
             backgroundColor: "black",
             color: "white",
             textTransform: "capitalize",
+            "&:hover": { backgroundColor: "black" },
           }}
           onClick={routeToLoginPage}
         >

@@ -25,6 +25,7 @@ const Hero = () => {
               textTransform: "capitalize",
               fontSize: 20,
               mt: "-20px",
+              "&:hover": { backgroundColor: "black" },
             }}
             size="large"
           >

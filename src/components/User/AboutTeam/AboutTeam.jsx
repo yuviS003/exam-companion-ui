@@ -1,13 +1,18 @@
+import { mishra } from "../../../assets";
+import { FaLinkedin } from "react-icons/fa";
+
 const team = [
   {
     name: "Aayushmaan Mishra",
     designation: "Developer",
-    pic: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?&fit=crop&w=280",
+    pic: mishra,
+    linkedIn: "https://www.linkedin.com/in/aayushmaan-mishra/",
   },
   {
     name: "Yuvraj Singh",
     designation: "Developer",
-    pic: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?&fit=crop&w=280",
+    pic: "https://media.licdn.com/dms/image/C5603AQEMP76RYxr9oQ/profile-displayphoto-shrink_400_400/0/1623302728762?e=1717027200&v=beta&t=Slcy857POGz9YTlUHaB-3oBeDiTstjNY9UcnY40JQVs",
+    linkedIn: "https://www.linkedin.com/in/yuvraj-singh-4ab111156/",
   },
 ];
 
@@ -27,10 +32,13 @@ const AboutTeam = () => {
             <img
               src={_team.pic}
               alt="team member"
-              className="object-cover rounded hover:shadow-lg hover:shadow-black transition"
+              className="object-cover rounded hover:shadow-lg hover:shadow-black transition w-[300px]"
             />
             <span className="text-xl font-light">{_team.name}</span>
             <span className="text-gray-600">{_team.designation}</span>
+            <a href={_team.linkedIn} target="_blank">
+              <FaLinkedin size={25} color="#0A66C2" />
+            </a>
           </div>
         ))}
       </div>
