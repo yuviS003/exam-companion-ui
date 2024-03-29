@@ -47,7 +47,10 @@ const Signup = ({
       console.log(response.data);
       if (response?.data?.message === "User registered successfully!") {
         localStorage.setItem("quizzo_token", response.data.token);
-        localStorage.setItem("quizzo_current_user", response.data.userDetails);
+        localStorage.setItem(
+          "quizzo_current_user",
+          JSON.stringify(response.data.userDetails)
+        );
         navigate("/dashboard/");
       }
       // Add any additional logic or state updates based on the response if needed
