@@ -7,10 +7,6 @@ import { Link } from "react-scroll";
 
 const Navbar = ({ currentTheme }) => {
   const navigate = useNavigate();
-  const routeToLoginPage = () => {
-    navigate("login");
-  };
-
   return (
     <div
       className={`${styles.sectionPaddingX} sticky bg-white top-0 left-0 z-[100] flex justify-between items-center py-6`}
@@ -42,7 +38,7 @@ const Navbar = ({ currentTheme }) => {
           sx={{
             textTransform: "capitalize",
           }}
-          onClick={routeToLoginPage}
+          onClick={() => navigate("/login")}
         >
           Log in
         </Button>
@@ -54,7 +50,7 @@ const Navbar = ({ currentTheme }) => {
             textTransform: "capitalize",
             "&:hover": { backgroundColor: "black" },
           }}
-          onClick={routeToLoginPage}
+          onClick={() => navigate("/signup")}
         >
           Sign up
         </Button>
