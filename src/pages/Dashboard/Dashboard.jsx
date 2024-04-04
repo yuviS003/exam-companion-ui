@@ -17,7 +17,7 @@ import { IoMdSearch } from "react-icons/io";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
-const Dashboard = ({ currentTheme }) => {
+const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   const navigate = useNavigate();
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const open = Boolean(menuAnchorEl);
@@ -38,14 +38,16 @@ const Dashboard = ({ currentTheme }) => {
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
+    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
-
+    setGlobalLoaderText("Preparing form editor...");
+    setGlobalLoaderStatus(true);
     axios
       .post(`${apiUrl}/api/excel/uploadFormTemplate`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: "Bearer your_token_here",
+          Authorization: `Bearer ${localStorage.getItem("quizzo_token")}`,
         },
       })
       .then((response) => {
@@ -57,6 +59,9 @@ const Dashboard = ({ currentTheme }) => {
       })
       .catch((error) => {
         console.error("Error uploading file:", error);
+      })
+      .finally(() => {
+        setGlobalLoaderStatus(false);
       });
   };
 
@@ -67,7 +72,7 @@ const Dashboard = ({ currentTheme }) => {
   return (
     <div className="flex min-h-screen">
       <div
-        className={`fixed top-0 left-0 h-screen z-[110] bg-[#111827] w-[300px] flex flex-col items-center py-2 pt-3 gap-5`}
+        className={`fixed top-0 left-0 h-screen z-[110] bg-[#111827] w-[270px] flex flex-col items-center py-2 pt-3 gap-5`}
       >
         <img src={lightLogo} alt="logo" className="w-[150px] bg-cover mb-2" />
         <input
@@ -91,7 +96,7 @@ const Dashboard = ({ currentTheme }) => {
           <MdDashboard /> Dashboard
         </div>
       </div>
-      <div className={`ml-[300px] bg-[#E5E7EB] w-full flex flex-col`}>
+      <div className={`ml-[270px] bg-[#E5E7EB] w-full flex flex-col`}>
         <div className="w-full sticky z-[100] top-0 right-0 px-4 py-3 bg-slate-100 flex items-center justify-between border-b-[5px] border-b-[#4338CA]">
           <TextField
             size="small"

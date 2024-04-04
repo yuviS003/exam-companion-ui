@@ -26,13 +26,13 @@ const AboutTeam = () => {
       <div className="w-full pt-10 flex justify-center gap-20">
         {team.map((_team, i) => (
           <div
-            className="flex flex-col items-center justify-center gap-3"
+            className="flex flex-col items-center justify-center gap-5"
             key={i}
           >
             <img
               src={_team.pic}
               alt="team member"
-              className="object-cover rounded hover:shadow-lg hover:shadow-black transition w-[300px]"
+              className="object-cover rounded hover:shadow-lg hover:shadow-black transition  h-[220px] w-[200px]"
             />
             <span className="text-xl font-light">{_team.name}</span>
             <span className="text-gray-600">{_team.designation}</span>

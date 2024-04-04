@@ -23,8 +23,7 @@ const Overview = () => {
       maxBodyLength: Infinity,
       url: `${apiUrl}/api/excel/downloadFormTemplate`,
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJlMzNlMDA3Zi1mMGE4LTQ0MzMtODFhYy1hNjMyMWE5NmVjOTkiLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwiY29udGFjdE51bWJlciI6IjEyMzQ1Njc4OTAiLCJnZW5kZXIiOiJNYWxlIiwib3JnYW5pemF0aW9uIjoiRXhhbXBsZSBDb3JwIiwicHJvZmVzc2lvbiI6IlNvZnR3YXJlIERldmVsb3BlciIsInByb2ZpbGVQaG90byI6Imh0dHBzOi8vZXhhbXBsZS5jb20vcHJvZmlsZS5qcGciLCJpYXQiOjE3MDgxNzM1NTcsImV4cCI6MTczOTczMTE1N30.ub51lC5nhsRDd5tCpK1lGkQUIBee0jmxfKQ_ZD3GijQ",
+        Authorization: `Bearer ${localStorage.getItem("quizzo_token")}`,
       },
       responseType: "blob", // Set response type to blob
     };
@@ -40,7 +39,10 @@ const Overview = () => {
         // Create a download link
         const downloadLink = document.createElement("a");
         downloadLink.href = window.URL.createObjectURL(blob);
-        downloadLink.setAttribute("download", `${currentAuthUser?.name}_form.xlsx`); // Set desired file name here
+        downloadLink.setAttribute(
+          "download",
+          `${currentAuthUser?.name}_form.xlsx`
+        ); // Set desired file name here
         downloadLink.click();
       })
       .catch((error) => {
@@ -58,9 +60,7 @@ const Overview = () => {
 
   return (
     <div className="p-10 flex flex-col">
-      <span className="text-4xl mb-2">
-        Hi, {currentAuthUser?.name}
-      </span>
+      <span className="text-4xl mb-2">Hi, {currentAuthUser?.name}</span>
       <div className="w-full flex items-center justify-between">
         <p className="text-sm">What are we doing today?</p>
         <p>
