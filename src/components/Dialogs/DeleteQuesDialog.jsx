@@ -22,8 +22,8 @@ const DeleteQuesDialog = ({
       <DialogTitle>Are you sure?</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you you want to delete this question? This is an irreversible
-          operation.
+          Are you sure you want to delete this question? This action is
+          irreversible.
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -35,7 +35,7 @@ const DeleteQuesDialog = ({
           Cancel
         </Button>
         <Button onClick={handleDeleteQuestionFunc} autoFocus>
-          Okay
+          Delete
         </Button>
       </DialogActions>
     </Dialog>

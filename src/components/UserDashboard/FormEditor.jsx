@@ -21,22 +21,9 @@ const FormEditor = () => {
   console.log(location.state);
 
   const handleDeleteQuestion = (question) => {
-    // Find the index of the question to be deleted
-    const index = formData.findIndex((q) => q === question);
+    const updatedQuestions = formData.filter((q) => q !== question);
 
-    if (index !== -1) {
-      // Remove the question from the array
-      const updatedQuestions = [...formData];
-      updatedQuestions.splice(index, 1);
-
-      // Update serial numbers
-      for (let i = index; i < updatedQuestions.length; i++) {
-        updatedQuestions[i]["S.No"] -= 1;
-      }
-
-      // Set the updated array of questions to state
-      setFormData(updatedQuestions);
-    }
+    setFormData(updatedQuestions);
   };
 
   if (!location.state) {
@@ -79,7 +66,7 @@ const FormEditor = () => {
             Back
           </Button>
           <Button variant="contained" sx={{ width: 300 }} color="success">
-            confirm
+            Confirm
           </Button>
         </div>
       </div>
@@ -98,6 +85,8 @@ const FormEditor = () => {
         setOpenEditConfirmDialog={setOpenEditConfirmDialog}
         currentQuestion={currentQuestion}
         setCurrentQuestion={setCurrentQuestion}
+        formData={formData}
+        setFormData={setFormData}
       />
     </>
   );
