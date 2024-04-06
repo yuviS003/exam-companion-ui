@@ -9,7 +9,7 @@ const Navbar = ({ currentTheme }) => {
   const navigate = useNavigate();
   return (
     <div
-      className={`${styles.sectionPaddingX} sticky bg-white top-0 left-0 z-[100] flex justify-between items-center py-6`}
+      className={`${styles.sectionPaddingX} sticky bg-white top-0 left-0 z-[100] flex justify-between items-center py-6 animate-fade-up animate-once animate-ease-linear animate-duration-100`}
     >
       <Logo currentTheme={currentTheme} className="w-[120px] bg-cover" />
 

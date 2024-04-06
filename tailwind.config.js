@@ -4,5 +4,5 @@ export default {
   currentTheme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animated")],
 };

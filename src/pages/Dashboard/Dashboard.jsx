@@ -97,7 +97,7 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
         </div>
       </div>
       <div className={`ml-[270px] bg-[#E5E7EB] w-full flex flex-col`}>
-        <div className="w-full sticky z-[100] top-0 right-0 px-4 py-3 bg-slate-100 flex items-center justify-between border-b-[5px] border-b-[#4338CA]">
+        <div className="w-full sticky z-[100] top-0 right-0 px-4 py-3 bg-white flex items-center justify-between border-b-[5px] border-b-[#4338CA]">
           <TextField
             size="small"
             variant="outlined"

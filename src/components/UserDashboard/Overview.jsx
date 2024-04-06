@@ -60,7 +60,9 @@ const Overview = () => {
 
   return (
     <div className="p-10 flex flex-col">
-      <span className="text-4xl mb-2">Hi, {currentAuthUser?.name}</span>
+      <span className="text-4xl mb-2">
+        Hi, {currentAuthUser?.name.split(" ")[0]}
+      </span>
       <div className="w-full flex items-center justify-between">
         <p className="text-sm">What are we doing today?</p>
         <p>

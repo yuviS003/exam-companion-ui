@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <div
       id="hero"
-      className="min-h-[90vh] px-20 flex items-center justify-center gap-20"
+      className="min-h-[90vh] px-20 flex items-center justify-center gap-20 animate-fade-left animate-once animate-ease-linear animate-duration-100"
     >
       <div className="flex flex-col gap-10 max-w-[650px]">
         <span className="text-6xl font-bold">
