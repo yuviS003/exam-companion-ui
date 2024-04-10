@@ -1,5 +1,7 @@
-import { mishra } from "../../../assets";
+import React, { useEffect, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
+import { useInView } from "react-intersection-observer";
+import { mishra } from "../../../assets";
 
 const team = [
   {
@@ -17,8 +19,27 @@ const team = [
 ];
 
 const AboutTeam = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const { ref, inView } = useInView({
+    threshold: 0.3, // Adjust threshold as needed
+  });
+
+  useEffect(() => {
+    if (inView) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, [inView]);
+
   return (
-    <div className="min-h-screen flex flex-col pt-2 pb-10 gap-5" id="About">
+    <div
+      className={`min-h-screen flex flex-col pt-2 pb-10 gap-5 ${
+        isVisible ? "animate-fade-up" : ""
+      }`}
+      id="About"
+      ref={ref}
+    >
       <span className="w-full text-center font-bold text-5xl">About</span>
       <span className="w-full text-center text-xl">
         We are a small passionate team.
@@ -36,7 +57,7 @@ const AboutTeam = () => {
             />
             <span className="text-xl font-light">{_team.name}</span>
             <span className="text-gray-600">{_team.designation}</span>
-            <a href={_team.linkedIn} target="_blank">
+            <a href={_team.linkedIn} target="_blank" rel="noopener noreferrer">
               <FaLinkedin size={25} color="#0A66C2" />
             </a>
           </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import darkTheme from "./themes/darkTheme";
 import lightTheme from "./themes/lightTheme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -11,6 +11,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import { SnackbarProvider } from "notistack";
 import Overview from "./components/UserDashboard/Overview";
 import FormEditor from "./components/UserDashboard/FormEditor";
+import "aos/dist/aos.css"; // Import the AOS CSS file
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -23,6 +24,14 @@ const App = () => {
     );
   };
 
+  // useEffect(() => {
+  //    AOS.init({
+  //      offset: 5, // Set the offset to your desired value
+  //    });
+    
+  //   AOS.refresh(); // Refresh AOS after initializing
+  //  }, []);
+  
   return (
     <ThemeProvider theme={currentTheme}>
       <SnackbarProvider
