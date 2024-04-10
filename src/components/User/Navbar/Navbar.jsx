@@ -4,12 +4,13 @@ import Logo from "../../Logo/Logo";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
+import darkTheme from "../../../themes/darkTheme";
 
 const Navbar = ({ currentTheme }) => {
   const navigate = useNavigate();
   return (
     <div
-      className={`${styles.sectionPaddingX} sticky bg-white top-0 left-0 z-[100] flex justify-between items-center py-6 animate-fade-up animate-once animate-ease-linear animate-duration-100`}
+      className={`${styles.sectionPaddingX} sticky ${currentTheme === darkTheme ? "bg-black" : "bg-white"} transition top-0 left-0 z-[100] flex justify-between items-center py-6 animate-fade-up animate-once animate-ease-linear animate-duration-100`}
     >
       <Logo currentTheme={currentTheme} className="w-[120px] bg-cover" />
 
@@ -24,7 +25,7 @@ const Navbar = ({ currentTheme }) => {
             offset={-100}
             duration={500}
             key={i}
-            className="text-slate-500 cursor-pointer hover:text-slate-800 active:text-slate-800 transition"
+            className={`${currentTheme === darkTheme ? "text-white hover:text-slate-300 active:text-slate-300" : "text-slate-500 hover:text-slate-800 active:text-slate-800"}  cursor-pointer hover:text-slate-800 active:text-slate-800 transition`}
           >
             {navText}
           </Link>

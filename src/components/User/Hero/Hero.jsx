@@ -1,7 +1,8 @@
 import { Button } from "@mui/material";
 import { heroImg } from "../../../assets";
+import darkTheme from "../../../themes/darkTheme";
 
-const Hero = () => {
+const Hero = ({ currentTheme }) => {
   return (
     <div
       id="hero"
@@ -11,7 +12,7 @@ const Hero = () => {
         <span className="text-6xl font-bold">
           Simplify, Customize, Excel Together
         </span>
-        <span className="text-lg text-gray-700">
+        <span className={`text-lg ${currentTheme === darkTheme ? "text-gray-300":"text-gray-700"}`}>
           Welcome to Quizzo, where creating engaging quizzes and surveys is as
           easy as pie! With our simplified form creation using Excel,
           you&apos;ll be a pro in no time!

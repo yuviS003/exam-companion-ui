@@ -8,6 +8,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import darkTheme from "../../../themes/darkTheme";
 
 const features = [
   {
@@ -48,7 +49,7 @@ const features = [
   },
 ];
 
-const Features = () => {
+const Features = ({ currentTheme }) => {
   const [isVisible, setIsVisible] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0.3, // Adjust threshold as needed
@@ -64,9 +65,8 @@ const Features = () => {
 
   return (
     <div
-      className={`min-h-screen py-8 px-10 flex flex-col gap-5 ${
-        isVisible ? "animate-fade-up animate-once" : ""
-      }`}
+      className={`min-h-screen py-8 px-10 flex flex-col gap-5 ${isVisible ? "animate-fade-up animate-once" : ""
+        }`}
       id="Features"
       ref={ref}
     >
@@ -82,7 +82,7 @@ const Features = () => {
             <span className="bg-black h-fit p-2 rounded-full">{feat.icon}</span>
             <div className="flex flex-col gap-2">
               <span className="font-bold text-2xl">{feat.title}</span>
-              <span className="text-gray-600 text-justify text-lg">
+              <span className={`${currentTheme === darkTheme ? "text-gray-300" : "text-gray-600"} text-justify text-lg transition`}>
                 {feat.description}
               </span>
             </div>
