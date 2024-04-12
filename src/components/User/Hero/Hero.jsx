@@ -6,10 +6,10 @@ const Hero = ({ currentTheme }) => {
   return (
     <div
       id="hero"
-      className="min-h-[90vh] px-20 flex items-center justify-center gap-20 animate-fade-left animate-once animate-ease-linear animate-duration-100"
+      className="min-h-[90vh] pt-14 lg:px-20 flex md:items-center justify-center gap-10 lg:gap-20 animate-fade-left animate-once animate-ease-linear animate-duration-100"
     >
-      <div className="flex flex-col gap-10 max-w-[650px]">
-        <span className="text-6xl font-bold">
+      <div className="flex flex-col gap-8 lg:gap-10 max-w-[650px]">
+        <span className="text-4xl md:text-5xl lg:text-6xl font-bold">
           Simplify, Customize, Excel Together
         </span>
         <span className={`text-lg ${currentTheme === darkTheme ? "text-gray-300":"text-gray-700"}`}>
@@ -38,7 +38,7 @@ const Hero = ({ currentTheme }) => {
         src={heroImg}
         // src="https://astroship.web3templates.com/_astro/hero.6fdd0dc6_Z2mbqjy.webp"
         alt="hero_img"
-        className="w-[400px] object-cover"
+        className="hidden md:block md:w-[300px]  lg:w-[400px] object-cover"
       />
     </div>
   );
