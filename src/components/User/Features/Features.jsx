@@ -65,24 +65,24 @@ const Features = ({ currentTheme }) => {
 
   return (
     <div
-      className={`min-h-screen py-8 px-10 flex flex-col gap-5 ${isVisible ? "animate-fade-up animate-once" : ""
+      className={`min-h-screen py-4 md:py-8 md:px-10 flex flex-col gap-5 ${isVisible ? "animate-fade-up animate-once" : ""
         }`}
       id="Features"
       ref={ref}
     >
-      <span className="font-bold text-5xl">
+      <span className="font-bold text-3xl lg:text-5xl">
         Everything you need to create a form
       </span>
-      <span className="text-xl">
+      <span className=" lg:text-xl">
         Simplifying your workflow with forms is now easier than ever.
       </span>
-      <div className="my-10 px-6  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-20">
+      <div className="my-10 md:px-6  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 md:gap-y-20">
         {features.map((feat, i) => (
           <div key={i} className="flex gap-5">
             <span className="bg-black h-fit p-2 rounded-full">{feat.icon}</span>
             <div className="flex flex-col gap-2">
-              <span className="font-bold text-2xl">{feat.title}</span>
-              <span className={`${currentTheme === darkTheme ? "text-gray-300" : "text-gray-600"} text-justify text-lg transition`}>
+              <span className="font-bold text-xl lg:text-2xl">{feat.title}</span>
+              <span className={`${currentTheme === darkTheme ? "text-gray-300" : "text-gray-600"} text-justify text-sm md:text-lg transition`}>
                 {feat.description}
               </span>
             </div>

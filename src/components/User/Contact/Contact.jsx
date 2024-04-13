@@ -20,16 +20,16 @@ const Contact = () => {
           isVisible ? "animate-fade-up" : ""
         }`}
       >
-        <span className="w-full text-center font-bold text-5xl">Contact</span>
-        <span className="w-full text-center text-xl">We are here to help.</span>
-        <div className="w-full flex justify-around pt-14 px-10">
+        <span className="w-full text-center font-bold text-3xl md:text-5xl">Contact</span>
+        <span className="w-full text-center md:text-xl">We are here to help.</span>
+        <div className="w-full flex flex-col md:flex-row justify-around pt-14 md:px-10 gap-5 md:gap-0">
           <div className="w-fit flex flex-col gap-3">
-            <span className="text-3xl font-bold">Contact Quizzo</span>
-            <span className="text-xl text-gray-600">
+            {/* <span className="text-2xl md:text-3xl font-bold">Contact Quizzo</span> */}
+            <span className="md:text-xl text-gray-600">
               Have something to say? We are here to help.
               <br /> Fill up the form or send an email
             </span>
-            <div className="text-lg flex flex-col gap-1 pl-1 text-gray-600">
+            <div className="md:text-lg flex flex-col gap-1 pl-1 text-gray-600">
               <div className="flex items-center justify-center gap-2 w-fit">
                 <CiLocationOn />
                 Lucknow, India

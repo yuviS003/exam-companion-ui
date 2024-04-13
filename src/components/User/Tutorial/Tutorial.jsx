@@ -20,14 +20,14 @@ const Tutorial = () => {
 
   return (
     <div
-      className={`min-h-screen flex flex-col pt-2 pb-10 gap-5 ${
+      className={`my-10 md:min-h-screen flex flex-col pt-2 pb-10 gap-5 ${
         isVisible ? "animate-fade-up animate-once" : ""
       }`}
       id="Tutorial"
       ref={ref}
     >
-      <span className="w-full text-center font-bold text-5xl">Take a look</span>
-      <span className="w-full text-center text-xl">
+      <span className="w-full text-center font-bold text-3xl md:text-5xl">Take a look</span>
+      <span className="w-full text-center md:text-xl">
         Quizzo is very easy to use. Here is a quick tutorial.
       </span>
       <div className="w-full flex items-center justify-center pt-5">
