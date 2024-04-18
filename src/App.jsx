@@ -12,6 +12,7 @@ import { SnackbarProvider } from "notistack";
 import Overview from "./components/UserDashboard/Overview";
 import FormEditor from "./components/UserDashboard/FormEditor";
 import "aos/dist/aos.css"; // Import the AOS CSS file
+import AllForms from "./components/UserDashboard/AllForms";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -28,10 +29,10 @@ const App = () => {
   //    AOS.init({
   //      offset: 5, // Set the offset to your desired value
   //    });
-    
+
   //   AOS.refresh(); // Refresh AOS after initializing
   //  }, []);
-  
+
   return (
     <ThemeProvider theme={currentTheme}>
       <SnackbarProvider
@@ -87,7 +88,28 @@ const App = () => {
           }
         >
           <Route index element={<Overview />} />
-          <Route path="form_editor" element={<FormEditor />} />
+          <Route
+            path="form_editor"
+            element={
+              <FormEditor
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
+          <Route
+            path="forms"
+            element={
+              <AllForms
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
         </Route>
       </Routes>
 
