@@ -39,23 +39,23 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          <form className="w-1/2 flex flex-col items-center justify-center gap-5">
+          <form className="md:w-1/2 flex flex-col items-center justify-center gap-5">
             <input
               type="text"
               required
               placeholder="What is your name ?"
-              className="w-full border-2 border-gray-400 rounded-lg p-3 placeholder:text-gray-700 text-xl outline-none ring-0 focus:border-gray-600 transition duration-200"
+              className="w-full border-2 border-gray-400 rounded-lg p-3 placeholder:text-gray-700 md:text-xl outline-none ring-0 focus:border-gray-600 transition duration-200"
             />
             <input
               type="email"
               required
               placeholder="Your email address"
-              className="w-full border-2 border-gray-400 rounded-lg p-3 placeholder:text-gray-700 text-xl outline-none ring-0 focus:border-gray-600 transition duration-200"
+              className="w-full border-2 border-gray-400 rounded-lg p-3 placeholder:text-gray-700 md:text-xl outline-none ring-0 focus:border-gray-600 transition duration-200"
             />
             <textarea
               placeholder="Your message"
               required
-              className="w-full border-2 border-gray-400 rounded-lg p-3 placeholder:text-gray-700 text-xl outline-none ring-0 focus:border-gray-600 transition duration-200 resize-none"
+              className="w-full border-2 border-gray-400 rounded-lg p-3 placeholder:text-gray-700 md:text-xl outline-none ring-0 focus:border-gray-600 transition duration-200 resize-none"
               rows={4}
             />
             <Button

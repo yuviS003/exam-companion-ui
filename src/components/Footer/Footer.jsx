@@ -11,8 +11,8 @@ const Footer = ({ currentTheme, toggleCurrentTheme }) => {
     <div
       className={`h-[15vh] ${styles.sectionPaddingX} flex justify-between items-center`}
     >
-      <Logo currentTheme={currentTheme} className="w-[80px] bg-cover" />
-      <span className="text-gray-400 tracking-wider text-sm text-center">
+      <Logo currentTheme={currentTheme} className="w-[65px] md:w-[80px] bg-cover" />
+      <span className="text-gray-400 tracking-wider text-xs md:text-sm text-center">
         Copyright © 2024 Quizzo. <br />
         All rights reserved.
       </span>
