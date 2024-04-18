@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { lightLogo } from "../../assets";
 import {
   Avatar,
@@ -18,6 +18,7 @@ import { IoMdSearch } from "react-icons/io";
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const open = Boolean(menuAnchorEl);
@@ -88,12 +89,30 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
           </div>
         </label>
         <div
-          className="w-full text-white px-2 py-2 flex items-center bg-gray-700 border-l-4 border-l-white cursor-pointer gap-2"
+          className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 ${
+            (location.pathname === "/dashboard" ||
+              location.pathname === "/dashboard/" ||
+              location.pathname === "/dashboard/form_editor" ||
+              location.pathname === "/dashboard/form_editor") &&
+            `bg-gray-700 border-l-4 border-l-white`
+          }`}
           onClick={() => {
             navigate("/dashboard/");
           }}
         >
           <MdDashboard /> Dashboard
+        </div>
+        <div
+          className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+            (location.pathname === "/dashboard/forms" ||
+              location.pathname === "/dashboard/forms/") &&
+            `bg-gray-700 border-l-4 border-l-white`
+          }`}
+          onClick={() => {
+            navigate("/dashboard/forms/");
+          }}
+        >
+          <MdDashboard /> Forms
         </div>
       </div>
       <div className={`ml-[270px] bg-[#E5E7EB] w-full flex flex-col`}>

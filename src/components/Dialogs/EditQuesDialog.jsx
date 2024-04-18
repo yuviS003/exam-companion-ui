@@ -35,7 +35,14 @@ const EditQuesDialog = ({
   };
 
   const handleSaveQuestion = () => {
-    const index = formData.findIndex((q) => q === currentQuestion);
+    console.log("all questions", formData);
+    console.log("modified question", currentQuestion);
+
+    const index = formData.findIndex(
+      (ques) => ques["S.No"] === currentQuestion["S.No"]
+    );
+
+    console.log(index);
 
     if (index !== -1) {
       const updatedFormData = [...formData];
