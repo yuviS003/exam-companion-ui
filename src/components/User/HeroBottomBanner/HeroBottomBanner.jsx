@@ -20,13 +20,13 @@ const HeroBottomBanner = () => {
 
   return (
     <div
-      className={`mb-20 w-full rounded-xl bg-black text-white flex flex-col items-center justify-center gap-8 py-32 ${
+      className={`mb-20 w-full rounded-xl bg-black text-white flex flex-col items-center justify-center gap-5 md:gap-8  py-10 md:py-32 ${
         isVisible ? "animate-fade-up" : ""
       }`}
       ref={ref}
     >
-      <span className="font-bold text-6xl">Build forms faster</span>
-      <span className="text-xl text-gray-500 max-w-[850px] text-center">
+      <span className="font-bold text-2xl md:text-6xl">Build forms faster</span>
+      <span className="text-sm mx-4 md:text-xl text-gray-500 max-w-[850px] text-center">
         Get started now! Click to create your first form and unlock the power of
         seamless form creation. Let&apos;s begin!
       </span>

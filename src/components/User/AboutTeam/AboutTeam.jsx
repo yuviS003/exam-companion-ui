@@ -40,11 +40,11 @@ const AboutTeam = () => {
       id="About"
       ref={ref}
     >
-      <span className="w-full text-center font-bold text-5xl">About</span>
-      <span className="w-full text-center text-xl">
+      <span className="w-full text-center font-bold text-3xl md:text-5xl">About</span>
+      <span className="w-full text-center md:text-xl">
         We are a small passionate team.
       </span>
-      <div className="w-full pt-10 flex justify-center gap-20">
+      <div className="w-full pt-10 flex flex-col md:flex-row justify-center gap-10 md:gap-20">
         {team.map((_team, i) => (
           <div
             className="flex flex-col items-center justify-center gap-5"
