@@ -18,6 +18,7 @@ const Hero = ({ currentTheme }) => {
           you&apos;ll be a pro in no time!
         </span>
         <div className="w-fit flex items-center justify-center gap-10">
+          <a href="/login">
           <Button
             variant="contained"
             sx={{
@@ -32,6 +33,7 @@ const Hero = ({ currentTheme }) => {
           >
             Start Quizzing!
           </Button>
+          </a>
         </div>
       </div>
       <img

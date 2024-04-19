@@ -17,7 +17,6 @@ const Tutorial = () => {
       setIsVisible(false); // Reset isVisible when out of view
     }
   }, [inView]);
-
   return (
     <div
       className={`my-10 md:min-h-screen flex flex-col pt-2 pb-10 gap-5 ${
@@ -32,7 +31,7 @@ const Tutorial = () => {
       </span>
       <div className="w-full flex items-center justify-center pt-5">
         <ReactPlayer
-          url="path_to_your_video.mp4"
+          url="\src\assets\placeholder.mp4"
           controls
           width="700px"
           height="100%"
