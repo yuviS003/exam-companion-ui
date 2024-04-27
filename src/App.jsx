@@ -13,6 +13,7 @@ import Overview from "./components/UserDashboard/Overview";
 import FormEditor from "./components/UserDashboard/FormEditor";
 import "aos/dist/aos.css"; // Import the AOS CSS file
 import AllForms from "./components/UserDashboard/AllForms";
+import FormResponse from "./pages/FormResponse/FormResponse";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -70,6 +71,17 @@ const App = () => {
           path="/signup"
           element={
             <Signup
+              currentTheme={currentTheme}
+              setGlobalLoaderText={setGlobalLoaderText}
+              setGlobalLoaderStatus={setGlobalLoaderStatus}
+              toggleCurrentTheme={toggleCurrentTheme}
+            />
+          }
+        />
+        <Route
+          path="/form/response/:formId"
+          element={
+            <FormResponse
               currentTheme={currentTheme}
               setGlobalLoaderText={setGlobalLoaderText}
               setGlobalLoaderStatus={setGlobalLoaderStatus}

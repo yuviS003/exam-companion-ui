@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
-import { useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import EditQuesDialog from "../Dialogs/EditQuesDialog";
 import DeleteQuesDialog from "../Dialogs/DeleteQuesDialog";
 import FormEditorQuesCard from "../Cards/FormEditorQuesCard";
@@ -10,7 +10,8 @@ const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   const location = useLocation();
-  const [formData, setFormData] = useState(location.state?.formData || []);
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState([]);
   const [formName, setFormName] = useState("");
   const [formDescription, setFormDescription] = useState("");
   const [formDueDate, setFormDueDate] = useState("");
@@ -62,6 +63,7 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        if (response.data?.message === "SUCCESS!") navigate("/dashboard/forms");
       })
       .catch((error) => {
         console.log(error);
@@ -71,9 +73,21 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       });
   };
 
-  if (!location.state) {
-    return <Navigate to="/dashboard/" />;
-  }
+  useEffect(() => {
+    if (location.state?.formData) {
+      setFormData(location.state.formData);
+    } else if (location.state?.form) {
+      const form = location.state.form;
+      console.log("received form id", form);
+      setFormName(form.formName);
+      setFormDescription(form.formDescription);
+      setFormDueDate(form.formDueDate);
+      setFormDuration(form.formDuration);
+      setFormData(JSON.parse(form.formQuestions));
+    } else {
+      return <Navigate to="/dashboard/" />;
+    }
+  }, []);
 
   return (
     <>

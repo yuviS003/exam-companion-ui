@@ -104,7 +104,7 @@ const Navbar = ({ currentTheme }) => {
   return (
     <>
       <div
-        className={`${styles.sectionPaddingX} sticky ${
+        className={`${styles.sectionPaddingX} w-full sticky ${
           currentTheme === darkTheme ? "bg-black" : "bg-white"
         } transition top-0 left-0 z-[100] flex justify-between items-center py-6 animate-fade-up animate-once animate-ease-linear animate-duration-100`}
       >
