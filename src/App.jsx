@@ -14,6 +14,8 @@ import FormEditor from "./components/UserDashboard/FormEditor";
 import "aos/dist/aos.css"; // Import the AOS CSS file
 import AllForms from "./components/UserDashboard/AllForms";
 import FormResponse from "./pages/FormResponse/FormResponse";
+import ViewFormResponses from "./pages/ViewFormResponses/ViewFormResponses";
+import FormResult from "./pages/FormResult/FormResult";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -115,6 +117,28 @@ const App = () => {
             path="forms"
             element={
               <AllForms
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
+          <Route
+            path="view-form-responses"
+            element={
+              <ViewFormResponses
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
+          <Route
+            path="form-result"
+            element={
+              <FormResult
                 currentTheme={currentTheme}
                 setGlobalLoaderText={setGlobalLoaderText}
                 setGlobalLoaderStatus={setGlobalLoaderStatus}

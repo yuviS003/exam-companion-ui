@@ -114,6 +114,18 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
         >
           <MdDashboard /> Forms
         </div>
+        <div
+          className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+            (location.pathname === "/dashboard/view-form-responses" ||
+              location.pathname === "/dashboard/view-form-responses/") &&
+            `bg-gray-700 border-l-4 border-l-white`
+          }`}
+          onClick={() => {
+            navigate("/dashboard/view-form-responses");
+          }}
+        >
+          <MdDashboard /> View Responses
+        </div>
       </div>
       <div className={`ml-[270px] bg-[#E5E7EB] w-full flex flex-col`}>
         <div className="w-full sticky z-[100] top-0 right-0 px-4 py-3 bg-white flex items-center justify-between border-b-[5px] border-b-[#4338CA]">

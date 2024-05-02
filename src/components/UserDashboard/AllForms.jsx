@@ -11,8 +11,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CopyLinkButton from "../Buttons/CopyButton";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+const uiUrl = import.meta.env.VITE_REACT_APP_UI_URL;
 
 const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   const [allFormsData, setAllFormsData] = useState([]);
@@ -148,9 +150,12 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     {
       field: "actions",
       headerName: "Actions",
-      width: 300,
+      width: 500,
       renderCell: (params) => (
         <div className="flex gap-5 items-center h-full">
+          <CopyLinkButton
+            link={`${uiUrl}/form/response/${params.row.formId}`}
+          />
           <Button
             onClick={() => handlePreviewQuestions(params.row)}
             variant="contained"
