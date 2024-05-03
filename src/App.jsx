@@ -16,6 +16,7 @@ import AllForms from "./components/UserDashboard/AllForms";
 import FormResponse from "./pages/FormResponse/FormResponse";
 import ViewFormResponses from "./pages/ViewFormResponses/ViewFormResponses";
 import FormResult from "./pages/FormResult/FormResult";
+import UserFeedback from "./pages/UserFeedback/UserFeedback";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -27,14 +28,6 @@ const App = () => {
       prevTheme === darkTheme ? lightTheme : darkTheme
     );
   };
-
-  // useEffect(() => {
-  //    AOS.init({
-  //      offset: 5, // Set the offset to your desired value
-  //    });
-
-  //   AOS.refresh(); // Refresh AOS after initializing
-  //  }, []);
 
   return (
     <ThemeProvider theme={currentTheme}>
@@ -139,6 +132,17 @@ const App = () => {
             path="form-result"
             element={
               <FormResult
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
+          <Route
+            path="feedback"
+            element={
+              <UserFeedback
                 currentTheme={currentTheme}
                 setGlobalLoaderText={setGlobalLoaderText}
                 setGlobalLoaderStatus={setGlobalLoaderStatus}

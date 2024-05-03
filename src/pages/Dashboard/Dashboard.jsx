@@ -14,6 +14,9 @@ import { IoMdAdd } from "react-icons/io";
 import axios from "axios";
 import { userAvatar } from "../../assets";
 import { IoMdSearch } from "react-icons/io";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import CommentIcon from "@mui/icons-material/Comment";
+import QuickreplyIcon from "@mui/icons-material/Quickreply";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -112,7 +115,7 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             navigate("/dashboard/forms/");
           }}
         >
-          <MdDashboard /> Forms
+          <ListAltIcon /> Forms
         </div>
         <div
           className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
@@ -124,7 +127,19 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             navigate("/dashboard/view-form-responses");
           }}
         >
-          <MdDashboard /> View Responses
+          <QuickreplyIcon /> View Responses
+        </div>
+        <div
+          className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+            (location.pathname === "/dashboard/feedback" ||
+              location.pathname === "/dashboard/feedback/") &&
+            `bg-gray-700 border-l-4 border-l-white`
+          }`}
+          onClick={() => {
+            navigate("/dashboard/feedback");
+          }}
+        >
+          <CommentIcon /> Feedback
         </div>
       </div>
       <div className={`ml-[270px] bg-[#E5E7EB] w-full flex flex-col`}>

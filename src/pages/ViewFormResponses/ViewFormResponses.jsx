@@ -150,15 +150,16 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .then((response) => {
         console.log("Form info", response.data);
-        if (response.data) {
+        if (response.data.length) {
+          const receivedForm = response.data[0];
           // construct the current form result
           const formResult = {
-            formId: response.data.formId,
-            formName: response.data.formName,
-            formDueDate: response.data.formDueDate,
-            formDuration: response.data.formDuration,
-            formDescription: response.data.formDescription,
-            formQuestions: JSON.parse(response.data.formQuestions),
+            formId: receivedForm.formId,
+            formName: receivedForm.formName,
+            formDueDate: receivedForm.formDueDate,
+            formDuration: receivedForm.formDuration,
+            formDescription: receivedForm.formDescription,
+            formQuestions: JSON.parse(receivedForm.formQuestions),
             formResponses: JSON.parse(formResponse.form_response),
           };
           console.log("formResult", formResult);
@@ -193,11 +194,11 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             state: {
               generatedResult,
               formInfo: {
-                formId: response.data.formId,
-                formName: response.data.formName,
-                formDueDate: response.data.formDueDate,
-                formDuration: response.data.formDuration,
-                formDescription: response.data.formDescription,
+                formId: receivedForm.formId,
+                formName: receivedForm.formName,
+                formDueDate: receivedForm.formDueDate,
+                formDuration: receivedForm.formDuration,
+                formDescription: receivedForm.formDescription,
               },
             },
           });
