@@ -1,13 +1,33 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FormResponseQuesCard from "../../components/Cards/FormResponseQuesCard";
 import Navbar from "../../components/User/Navbar/Navbar";
 import { Button } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import AuthDialog from "../../components/Dialogs/AuthDialog";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import Lottie from "react-lottie";
+import animationData from "../../assets/Animation.json"; // Import your Lottie JSON file
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+
+const LottieAnimation = () => {
+  const defaultOptions = {
+    loop: false, // Set to false if you don't want the animation to loop
+    autoplay: true, // Set to false if you want to control the animation manually
+    animationData: animationData, // The imported Lottie JSON file
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  return (
+    <div>
+      <Lottie options={defaultOptions} height={250} width={350} />
+    </div>
+  );
+};
 
 const FormResponse = ({
   setGlobalLoaderText,
@@ -17,7 +37,10 @@ const FormResponse = ({
   const [currentFormData, setCurrentFormData] = useState([]);
   const [currentFormQuestions, setCurrentFormQuestions] = useState([]);
   const [openAuthDialog, setOpenAuthDialog] = useState(false);
+  const [isFormFilled, setIsFormFilled] = useState(false);
+  const [filledFormResponse, setFilledFormResponse] = useState({});
   const location = useLocation();
+  const navigate = useNavigate();
 
   const fetchFormData = async () => {
     // Set loader text and status
@@ -154,6 +177,8 @@ const FormResponse = ({
   };
 
   const checkResponseExists = () => {
+    setGlobalLoaderText("Preparing form...");
+    setGlobalLoaderStatus(true);
     const currentUser = JSON.parse(localStorage.getItem("quizzo_current_user"));
     const formId = location.pathname.split("/")[3];
     const config = {
@@ -170,12 +195,16 @@ const FormResponse = ({
         console.log("response", response.data);
         if (response.data) {
           console.log("form is already filled");
+          setFilledFormResponse(response.data);
+          setIsFormFilled(true);
+          setGlobalLoaderStatus(false);
         } else {
           fetchFormData();
         }
       })
       .catch((error) => {
         console.error("Error fetching response data:", error);
+        setGlobalLoaderStatus(false);
       });
   };
 
@@ -191,53 +220,78 @@ const FormResponse = ({
     if (!isUserLoggedIn) {
       console.log("trigger auth process");
       setOpenAuthDialog(true);
+      setGlobalLoaderStatus(false);
     } else {
       checkResponseExists();
     }
   };
   useEffect(() => {
+    setGlobalLoaderText("Preparing form...");
+    setGlobalLoaderStatus(true);
     prepareForm();
   }, []);
 
   return (
     <>
       <div className="bg-slate-100 flex flex-col items-center justify-center">
-        <Navbar currentTheme={currentTheme} />
-        <div className="bg-white shadow w-fit flex flex-col items-center justify-center p-10">
-          <span className="my-2 w-full text-7xl">
-            {currentFormData?.formName}
-          </span>
-          <div className="italic my-2 w-full flex justify-between items-center">
-            <span className="w-full text-xl">
-              Due Date: {currentFormData?.formDueDate}
+        <Navbar currentTheme={currentTheme} isFormResponse />
+        {isFormFilled ? (
+          <div className="min-h-screen shadow bg-white p-10 flex flex-col gap-5">
+            <LottieAnimation />
+            <span className="text-4xl">You have already filled this form!</span>
+            <span>
+              You have attempted this form at{" "}
+              {filledFormResponse?.createdAt.split("T")[0]}
             </span>
-            <span className="w-full text-xl text-end">
-              Duration: {currentFormData?.formDuration}mins
-            </span>
-          </div>
-          <span className="italic my-2 w-full text-xl">
-            Instructions:- <br />
-            <span className="italic text-base">
-              {currentFormData?.formDescription}
-            </span>
-          </span>
 
-          {currentFormQuestions.map((_ques, i) => {
-            return (
-              <FormResponseQuesCard
-                _form={_ques}
-                index={i}
-                handleCheckboxChange={handleCheckboxChange}
-                handleRadioChange={handleRadioChange}
-                handleDropDownChange={handleDropDownChange}
-                key={i}
-              />
-            );
-          })}
-          <Button fullWidth variant="contained" onClick={saveFormResponse}>
-            Submit
-          </Button>
-        </div>
+            <div className="my-5">
+              <Button
+                variant="contained"
+                color="success"
+                endIcon={<ArrowRightAltIcon />}
+                onClick={() => navigate("/dashboard")}
+              >
+                Go to Dashboard
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white shadow w-fit flex flex-col items-center justify-center p-10">
+            <span className="my-2 w-full text-7xl">
+              {currentFormData?.formName}
+            </span>
+            <div className="italic my-2 w-full flex justify-between items-center">
+              <span className="w-full text-xl">
+                Due Date: {currentFormData?.formDueDate}
+              </span>
+              <span className="w-full text-xl text-end">
+                Duration: {currentFormData?.formDuration}mins
+              </span>
+            </div>
+            <span className="italic my-2 w-full text-xl">
+              Instructions:- <br />
+              <span className="italic text-base">
+                {currentFormData?.formDescription}
+              </span>
+            </span>
+
+            {currentFormQuestions.map((_ques, i) => {
+              return (
+                <FormResponseQuesCard
+                  _form={_ques}
+                  index={i}
+                  handleCheckboxChange={handleCheckboxChange}
+                  handleRadioChange={handleRadioChange}
+                  handleDropDownChange={handleDropDownChange}
+                  key={i}
+                />
+              );
+            })}
+            <Button fullWidth variant="contained" onClick={saveFormResponse}>
+              Submit
+            </Button>
+          </div>
+        )}
       </div>
       {openAuthDialog && (
         <AuthDialog

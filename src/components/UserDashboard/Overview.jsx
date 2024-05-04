@@ -14,6 +14,31 @@ const formCreationSteps = [
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
+const CountingAnimation = ({ start, end, duration, className }) => {
+  const [count, setCount] = useState(start);
+
+  useEffect(() => {
+    let startTime = null;
+    const step = (timestamp) => {
+      if (!startTime) {
+        startTime = timestamp;
+      }
+      const elapsed = timestamp - startTime;
+      const currentCount = start + (end - start) * (elapsed / duration);
+      if (elapsed < duration) {
+        setCount(Math.floor(currentCount));
+        requestAnimationFrame(step);
+      } else {
+        setCount(end);
+      }
+    };
+
+    requestAnimationFrame(step);
+  }, [start, end, duration]);
+
+  return <div className={className}>{count.toLocaleString()}+</div>;
+};
+
 const Overview = () => {
   const [currentAuthUser, setCurrentAuthUser] = useState(null);
 
@@ -66,7 +91,10 @@ const Overview = () => {
       <div className="w-full flex items-center justify-between">
         <p className="text-sm">What are we doing today?</p>
         <p>
-          <i>Total Quizzes: 0</i>
+          <i className="flex items-center gap-1">
+            Total Quizzes:{" "}
+            <CountingAnimation start={0} end={500} duration={1000} />
+          </i>
         </p>
       </div>
       <div className="w-full flex items-start justify-between pt-8 pb-14">

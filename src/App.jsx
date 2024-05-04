@@ -17,6 +17,7 @@ import FormResponse from "./pages/FormResponse/FormResponse";
 import ViewFormResponses from "./pages/ViewFormResponses/ViewFormResponses";
 import FormResult from "./pages/FormResult/FormResult";
 import UserFeedback from "./pages/UserFeedback/UserFeedback";
+import Test from "./Test";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -151,6 +152,7 @@ const App = () => {
             }
           />
         </Route>
+        <Route path="/test" element={<Test />} />
       </Routes>
 
       {globalLoaderStatus && (

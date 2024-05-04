@@ -9,7 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { userAvatar } from "../../../assets";
 
-const Navbar = ({ currentTheme }) => {
+const Navbar = ({ currentTheme, isFormResponse = false }) => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -39,68 +39,80 @@ const Navbar = ({ currentTheme }) => {
       >
         <Logo currentTheme={currentTheme} className="w-[120px] bg-cover" />
 
-        {/* NavLinks */}
-        <div className="hidden lg:flex items-center justify-center gap-10">
-          {["Features", "Tutorial", "About", "Contact"].map((navText, i) => (
-            <Link
-              activeClass="active"
-              to={navText}
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={500}
-              key={i}
-              className={`${
-                currentTheme === darkTheme
-                  ? "text-white hover:text-slate-300 active:text-slate-300"
-                  : "text-slate-500 hover:text-slate-800 active:text-slate-800"
-              }  cursor-pointer hover:text-slate-800 active:text-slate-800 transition`}
-            >
-              {navText}
-            </Link>
-          ))}
-        </div>
-
-        <div className="hidden lg:flex items-center justify-center gap-5">
-          {isUserLoggedIn ? (
-            <>
-              <Avatar
-                alt="user"
-                src={userAvatar}
-                sx={{ cursor: "pointer" }}
-                onClick={routeToDashboard}
-              />
-            </>
-          ) : (
-            <>
-              <Button
-                variant="text"
-                color="inherit"
-                sx={{
-                  textTransform: "capitalize",
-                }}
-                onClick={() => navigate("/login")}
-              >
-                Log in
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "black",
-                  color: "white",
-                  textTransform: "capitalize",
-                  "&:hover": { backgroundColor: "black" },
-                }}
-                onClick={() => navigate("/signup")}
-              >
-                Sign up
-              </Button>
-            </>
-          )}
-        </div>
-        <button className="block lg:hidden" onClick={toggleDrawer}>
-          <GiHamburgerMenu size={25} />
-        </button>
+        {isFormResponse ? (
+          <Avatar
+            alt="user"
+            src={userAvatar}
+            sx={{ cursor: "pointer" }}
+            onClick={routeToDashboard}
+          />
+        ) : (
+          <>
+            {/* NavLinks */}
+            <div className="hidden lg:flex items-center justify-center gap-10">
+              {["Features", "Tutorial", "About", "Contact"].map(
+                (navText, i) => (
+                  <Link
+                    activeClass="active"
+                    to={navText}
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                    key={i}
+                    className={`${
+                      currentTheme === darkTheme
+                        ? "text-white hover:text-slate-300 active:text-slate-300"
+                        : "text-slate-500 hover:text-slate-800 active:text-slate-800"
+                    }  cursor-pointer hover:text-slate-800 active:text-slate-800 transition`}
+                  >
+                    {navText}
+                  </Link>
+                )
+              )}
+            </div>
+            <div className="hidden lg:flex items-center justify-center gap-5">
+              {isUserLoggedIn ? (
+                <>
+                  <Avatar
+                    alt="user"
+                    src={userAvatar}
+                    sx={{ cursor: "pointer" }}
+                    onClick={routeToDashboard}
+                  />
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="text"
+                    color="inherit"
+                    sx={{
+                      textTransform: "capitalize",
+                    }}
+                    onClick={() => navigate("/login")}
+                  >
+                    Log in
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "black",
+                      color: "white",
+                      textTransform: "capitalize",
+                      "&:hover": { backgroundColor: "black" },
+                    }}
+                    onClick={() => navigate("/signup")}
+                  >
+                    Sign up
+                  </Button>
+                </>
+              )}
+            </div>
+            <button className="block lg:hidden" onClick={toggleDrawer}>
+              <GiHamburgerMenu size={25} />
+            </button>
+          </>
+        )}
       </div>
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
         <Box
