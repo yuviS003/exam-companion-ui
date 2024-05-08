@@ -8,7 +8,7 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdDashboard } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import axios from "axios";
@@ -17,6 +17,7 @@ import { IoMdSearch } from "react-icons/io";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import CommentIcon from "@mui/icons-material/Comment";
 import QuickreplyIcon from "@mui/icons-material/Quickreply";
+import systemAdminEmails from "../../../system-admin-users.json";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -105,42 +106,88 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
         >
           <MdDashboard /> Dashboard
         </div>
-        <div
-          className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
-            (location.pathname === "/dashboard/forms" ||
-              location.pathname === "/dashboard/forms/") &&
-            `bg-gray-700 border-l-4 border-l-white`
-          }`}
-          onClick={() => {
-            navigate("/dashboard/forms/");
-          }}
-        >
-          <ListAltIcon /> Forms
-        </div>
-        <div
-          className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
-            (location.pathname === "/dashboard/view-form-responses" ||
-              location.pathname === "/dashboard/view-form-responses/") &&
-            `bg-gray-700 border-l-4 border-l-white`
-          }`}
-          onClick={() => {
-            navigate("/dashboard/view-form-responses");
-          }}
-        >
-          <QuickreplyIcon /> View Responses
-        </div>
-        <div
-          className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
-            (location.pathname === "/dashboard/feedback" ||
-              location.pathname === "/dashboard/feedback/") &&
-            `bg-gray-700 border-l-4 border-l-white`
-          }`}
-          onClick={() => {
-            navigate("/dashboard/feedback");
-          }}
-        >
-          <CommentIcon /> Feedback
-        </div>
+        {systemAdminEmails.includes(
+          JSON.parse(localStorage.getItem("quizzo_current_user")).email
+        ) ? (
+          <>
+            <div
+              className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+                (location.pathname === "/dashboard/all-forms/" ||
+                  location.pathname === "/dashboard/all-forms") &&
+                `bg-gray-700 border-l-4 border-l-white`
+              }`}
+              onClick={() => {
+                navigate("/dashboard/all-forms/");
+              }}
+            >
+              <ListAltIcon /> All Forms
+            </div>
+            <div
+              className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+                (location.pathname === "/dashboard/view-admin-form-responses" ||
+                  location.pathname ===
+                    "/dashboard/view-admin-form-responses/") &&
+                `bg-gray-700 border-l-4 border-l-white`
+              }`}
+              onClick={() => {
+                navigate("/dashboard/view-admin-form-responses");
+              }}
+            >
+              <QuickreplyIcon /> View All Responses
+            </div>
+            <div
+              className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+                (location.pathname === "/dashboard/all-feedback" ||
+                  location.pathname === "/dashboard/all-feedback/") &&
+                `bg-gray-700 border-l-4 border-l-white`
+              }`}
+              onClick={() => {
+                navigate("/dashboard/all-feedback");
+              }}
+            >
+              <CommentIcon /> All Feedback
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+                (location.pathname === "/dashboard/forms" ||
+                  location.pathname === "/dashboard/forms/") &&
+                `bg-gray-700 border-l-4 border-l-white`
+              }`}
+              onClick={() => {
+                navigate("/dashboard/forms/");
+              }}
+            >
+              <ListAltIcon /> Forms
+            </div>
+            <div
+              className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+                (location.pathname === "/dashboard/view-form-responses" ||
+                  location.pathname === "/dashboard/view-form-responses/") &&
+                `bg-gray-700 border-l-4 border-l-white`
+              }`}
+              onClick={() => {
+                navigate("/dashboard/view-form-responses");
+              }}
+            >
+              <QuickreplyIcon /> View Responses
+            </div>
+            <div
+              className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
+                (location.pathname === "/dashboard/feedback" ||
+                  location.pathname === "/dashboard/feedback/") &&
+                `bg-gray-700 border-l-4 border-l-white`
+              }`}
+              onClick={() => {
+                navigate("/dashboard/feedback");
+              }}
+            >
+              <CommentIcon /> Feedback
+            </div>
+          </>
+        )}
       </div>
       <div className={`ml-[270px] bg-[#E5E7EB] w-full flex flex-col`}>
         <div className="w-full sticky z-[100] top-0 right-0 px-4 py-3 bg-white flex items-center justify-between border-b-[5px] border-b-[#4338CA]">

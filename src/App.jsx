@@ -18,6 +18,9 @@ import ViewFormResponses from "./pages/ViewFormResponses/ViewFormResponses";
 import FormResult from "./pages/FormResult/FormResult";
 import UserFeedback from "./pages/UserFeedback/UserFeedback";
 import Test from "./Test";
+import AllFormsForAdmin from "./pages/Admin/AllFormsForAdmin";
+import ViewFormResponsesForAdmin from "./pages/Admin/ViewFormResponsesForAdmin";
+import UserFeedbackForAdmin from "./pages/Admin/UserFeedbackForAdmin";
 
 const App = () => {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -119,9 +122,31 @@ const App = () => {
             }
           />
           <Route
+            path="all-forms"
+            element={
+              <AllFormsForAdmin
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
+          <Route
             path="view-form-responses"
             element={
               <ViewFormResponses
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
+          <Route
+            path="view-admin-form-responses"
+            element={
+              <ViewFormResponsesForAdmin
                 currentTheme={currentTheme}
                 setGlobalLoaderText={setGlobalLoaderText}
                 setGlobalLoaderStatus={setGlobalLoaderStatus}
@@ -144,6 +169,17 @@ const App = () => {
             path="feedback"
             element={
               <UserFeedback
+                currentTheme={currentTheme}
+                setGlobalLoaderText={setGlobalLoaderText}
+                setGlobalLoaderStatus={setGlobalLoaderStatus}
+                toggleCurrentTheme={toggleCurrentTheme}
+              />
+            }
+          />
+          <Route
+            path="all-feedback"
+            element={
+              <UserFeedbackForAdmin
                 currentTheme={currentTheme}
                 setGlobalLoaderText={setGlobalLoaderText}
                 setGlobalLoaderStatus={setGlobalLoaderStatus}

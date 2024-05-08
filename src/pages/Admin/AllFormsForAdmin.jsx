@@ -6,19 +6,18 @@ import {
   DialogContent,
   DialogTitle,
   FormControlLabel,
-  Paper,
   Radio,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CopyLinkButton from "../Buttons/CopyButton";
+import CopyLinkButton from "../../components/Buttons/CopyButton";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const uiUrl = import.meta.env.VITE_REACT_APP_UI_URL;
 
-const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
+const AllFormsForAdmin = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   const [allFormsData, setAllFormsData] = useState([]);
   const navigate = useNavigate();
   const [formPreviewDialog, setFormPreviewDialog] = useState(false);
@@ -42,9 +41,7 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     const config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${apiUrl}/api/form/user/${
-        JSON.parse(localStorage.getItem("quizzo_current_user"))._id
-      }`,
+      url: `${apiUrl}/api/form/`,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("quizzo_token")}`,
       },
@@ -53,6 +50,7 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     axios
       .request(config)
       .then((response) => {
+        console.log("response", response);
         // Map the response data to set the row ID
         let formsData = response.data.map((form) => ({
           ...form,
@@ -125,7 +123,7 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   const columns = [
     {
       field: "formId",
-      headerName: "ID",
+      headerName: "Form ID",
       width: 100,
       renderCell: (params) => (
         <p
@@ -136,6 +134,7 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
         </p>
       ),
     },
+    { field: "userId", headerName: "User ID", width: 250 },
     { field: "formName", headerName: "Form Name", width: 150 },
     { field: "formDuration", headerName: "Duration", width: 100 },
     { field: "formDueDate", headerName: "Due Date", width: 150 },
@@ -197,16 +196,14 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             You have {allFormsData.length} forms
           </p>
         </div>
-        <Paper elevation={5}>
-          <div className="w-full max-w-full overflow-auto h-[400px]">
-            <DataGrid
-              rows={allFormsData}
-              columns={columns}
-              sx={{ backgroundColor: "white" }}
-              disableSelectionOnClick={true}
-            />
-          </div>
-        </Paper>
+        <div className="w-full max-w-[1200px] overflow-auto h-[400px]">
+          <DataGrid
+            rows={allFormsData}
+            columns={columns}
+            sx={{ backgroundColor: "white" }}
+            disableSelectionOnClick={true}
+          />
+        </div>
       </div>
       <Dialog
         open={formPreviewDialog}
@@ -277,4 +274,4 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   );
 };
 
-export default AllForms;
+export default AllFormsForAdmin;
