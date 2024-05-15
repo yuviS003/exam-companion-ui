@@ -13,6 +13,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useNavigate } from "react-router-dom";
+import CompHeading from "../../components/Heading/CompHeading";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -60,9 +61,12 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       renderCell: (params) => (
         <Button
           variant="contained"
-          size="small"
-          color="success"
           onClick={() => constructFormResult(params.row)}
+          sx={{
+            backgroundColor: "#4338CA",
+            "&:hover": { backgroundColor: "#4338CA" },
+          }}
+          size="small"
         >
           View Result
         </Button>
@@ -85,9 +89,9 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
         },
       })
       .then((response) => {
-        console.log("Form info", response.data);
-        if (response.data) {
-          setFormInformation(response.data);
+        console.log("Form info", response.data[0]);
+        if (response.data.length) {
+          setFormInformation(response.data[0]);
           setIsFormInfoDialogOpen(true); // Open the dialog
         }
       })
@@ -222,8 +226,13 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 p-5">
-      <p className="text-3xl">Attempted Forms</p>
+    <div className="flex flex-col gap-5 p-10">
+      <div className="flex justify-between">
+        <CompHeading heading="Attempted Forms" />
+        <p className="text-xs self-end italic">
+          You have responded to {allResponses.length} forms
+        </p>
+      </div>
       <div className="">
         <Box sx={{ height: 450, width: "100%", backgroundColor: "white" }}>
           <DataGrid

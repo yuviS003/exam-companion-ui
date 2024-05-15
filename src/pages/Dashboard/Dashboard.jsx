@@ -41,6 +41,10 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     handleMenuClose();
   };
 
+  const backToHomepage = () => {
+    navigate("/");
+  };
+
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     console.log(file);
@@ -133,7 +137,7 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
                 navigate("/dashboard/view-admin-form-responses");
               }}
             >
-              <QuickreplyIcon /> View All Responses
+              <QuickreplyIcon /> All Attempted Forms
             </div>
             <div
               className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
@@ -172,7 +176,7 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
                 navigate("/dashboard/view-form-responses");
               }}
             >
-              <QuickreplyIcon /> View Responses
+              <QuickreplyIcon /> Attempted Forms
             </div>
             <div
               className={`w-full text-white px-2 py-2 flex items-center cursor-pointer gap-2 hover:bg-gray-800  active:bg-gray-800 transition duration-300 ${
@@ -213,6 +217,7 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             <Avatar alt="user" src={userAvatar} />
           </IconButton>
           <Menu anchorEl={menuAnchorEl} open={open} onClose={handleMenuClose}>
+            <MenuItem onClick={backToHomepage}>Back to Homepage</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>

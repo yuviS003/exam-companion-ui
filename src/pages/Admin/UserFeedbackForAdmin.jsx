@@ -137,6 +137,7 @@ import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { Box, Tooltip } from "@mui/material";
+import CompHeading from "../../components/Heading/CompHeading";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -210,8 +211,9 @@ const UserFeedbackForAdmin = ({
   }, []);
 
   return (
-    <div className="flex flex-col gap-5 p-5">
-      <p className="text-3xl">User Feedback</p>
+    <div className="flex flex-col gap-5 p-10">
+      <CompHeading heading="User Feedback" />
+
       <div>
         <Box sx={{ height: 450, width: "100%", backgroundColor: "white" }}>
           <DataGrid

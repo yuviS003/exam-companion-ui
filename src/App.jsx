@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import darkTheme from "./themes/darkTheme";
 import lightTheme from "./themes/lightTheme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -11,7 +11,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import { SnackbarProvider } from "notistack";
 import Overview from "./components/UserDashboard/Overview";
 import FormEditor from "./components/UserDashboard/FormEditor";
-import "aos/dist/aos.css"; // Import the AOS CSS file
+import "aos/dist/aos.css"; // Import the AOS CSS file
 import AllForms from "./components/UserDashboard/AllForms";
 import FormResponse from "./pages/FormResponse/FormResponse";
 import ViewFormResponses from "./pages/ViewFormResponses/ViewFormResponses";

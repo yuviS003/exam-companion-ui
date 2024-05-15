@@ -67,7 +67,7 @@ const AuthDialog = ({ setOpenAuthDialog, prepareForm }) => {
     try {
       const userInfo = {
         name: signUpName,
-        username: signUpUsername,
+        userName: signUpUsername,
         email: signUpEmail,
         password: signUpPassword,
       };

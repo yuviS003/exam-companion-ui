@@ -153,6 +153,7 @@ const FormResponse = ({
           .request(config)
           .then((response) => {
             console.log(JSON.stringify(response.data));
+            setIsFormFilled(true);
           })
           .catch((error) => {
             console.log(error);
@@ -241,7 +242,8 @@ const FormResponse = ({
             <span className="text-4xl">You have filled this form!</span>
             <span>
               You have attempted this form at{" "}
-              {filledFormResponse?.createdAt.split("T")[0]}
+              {filledFormResponse?.createdAt &&
+                filledFormResponse?.createdAt.split("T")[0]}
             </span>
 
             <div className="my-5">

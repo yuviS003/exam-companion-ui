@@ -2,6 +2,7 @@ import { useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import axios from "axios";
 import { Button } from "@mui/material";
+import CompHeading from "../../components/Heading/CompHeading";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -56,8 +57,9 @@ const UserFeedback = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-5 p-5">
-      <p className="text-3xl font-bold">Give your feedback!</p>
+    <div className="w-full flex flex-col gap-5 p-10">
+      <CompHeading heading="Give your feedback!" />
+
       <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
         {/* Add a label for the feedback textarea */}
         <label htmlFor="feedback" className="text-lg font-medium">
@@ -72,7 +74,15 @@ const UserFeedback = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
           placeholder="Enter your feedback here..."
           required
         />
-        <Button variant="contained" color="primary" size="large" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{
+            backgroundColor: "#4338CA",
+            "&:hover": { backgroundColor: "#4338CA" },
+          }}
+          size="small"
+        >
           Submit
         </Button>
       </form>

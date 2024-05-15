@@ -2,6 +2,7 @@ import { Button, Chip } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GiCheckMark } from "react-icons/gi";
+import CompHeading from "../../components/Heading/CompHeading";
 
 const alphabet = Array.from({ length: 26 }, (_, i) =>
   String.fromCharCode(97 + i)
@@ -38,9 +39,10 @@ const FormResult = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-8 p-5">
+    <div className="flex flex-col gap-8 p-10">
       <div className="w-full flex items-center justify-between">
-        <p className="text-3xl">Viewing Results for - {formInfo?.formId}</p>
+        <CompHeading heading={`Viewing Results for - ${formInfo?.formId}`} />
+
         <Button variant="outlined" onClick={() => navigate(-1)} size="small">
           Go Back
         </Button>

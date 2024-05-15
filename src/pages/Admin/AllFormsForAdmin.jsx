@@ -13,6 +13,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CopyLinkButton from "../../components/Buttons/CopyButton";
+import CompHeading from "../../components/Heading/CompHeading";
+import PurpleContainedButton from "../../components/Buttons/PurpleContainedButton";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const uiUrl = import.meta.env.VITE_REACT_APP_UI_URL;
@@ -163,17 +165,25 @@ const AllFormsForAdmin = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             link={`${uiUrl}/form/response/${params.row.formId}`}
           />
           <Button
-            onClick={() => handlePreviewQuestions(params.row)}
             variant="contained"
-            color="secondary"
+            onClick={() => handlePreviewQuestions(params.row)}
+            sx={{
+              backgroundColor: "#4338CA",
+              "&:hover": { backgroundColor: "#4338CA" },
+            }}
             size="small"
           >
             Preview Questions
           </Button>
           <Button
-            onClick={() => handleDelete(params.row.formId)}
             variant="contained"
-            color="error"
+            onClick={() => handleDelete(params.row.formId)}
+            sx={{
+              backgroundColor: "white",
+              "&:hover": { backgroundColor: "white" },
+              border: "1px solid #4338CA",
+              color: "#4338CA",
+            }}
             size="small"
           >
             Delete
@@ -191,7 +201,7 @@ const AllFormsForAdmin = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     <>
       <div className="flex flex-col gap-5 p-10">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">All Forms</h1>
+          <CompHeading heading="All Forms" />
           <p className="text-xs self-end italic">
             You have {allFormsData.length} forms
           </p>

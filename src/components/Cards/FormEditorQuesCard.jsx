@@ -10,9 +10,9 @@ const FormEditorQuesCard = ({
 }) => {
   return (
     <div className="relative w-full rounded-lg border bg-white flex min-h-[100px] px-5 py-5 gap-5">
-      <div className="h-[100px] flex items-center justify-center cursor-grab">
+      {/* <div className="h-[100px] flex items-center justify-center cursor-grab">
         <GrDrag size={20} />
-      </div>
+      </div> */}
       <div className="flex flex-col w-full gap-5">
         <span className="text-3xl font-bold text-gray-700">
           Q{index + 1}. {_form["Question Text"]}
@@ -69,17 +69,17 @@ const FormEditorQuesCard = ({
       <div className="absolute top-0 right-0 z-[99] flex items-center justify-center gap-3 mt-2 mr-2">
         <button
           type="button"
-          className="bg-green-600 p-1 rounded cursor-pointer"
+          className="bg-[#4338CA] p-1 rounded cursor-pointer"
           onClick={triggerQuesEdit}
         >
           <MdModeEditOutline color="#fff" size={20} />
         </button>
         <button
           type="button"
-          className="bg-red-600 p-1 rounded cursor-pointer"
+          className="bg-white border border-[#4338CA] p-1 rounded cursor-pointer"
           onClick={triggerQuesDelete}
         >
-          <MdDelete color="#fff" size={20} />
+          <MdDelete color="#4338CA" size={20} />
         </button>
       </div>
     </div>

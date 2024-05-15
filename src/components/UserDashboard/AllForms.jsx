@@ -14,11 +14,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CopyLinkButton from "../Buttons/CopyButton";
+import CompHeading from "../Heading/CompHeading";
+import FormResponsesViewDialog from "../Dialogs/FormResponsesViewDialog";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const uiUrl = import.meta.env.VITE_REACT_APP_UI_URL;
 
 const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
+  const [allUsers, setAllUsers] = useState([]);
+  const [allResponses, setAllResponses] = useState([]);
   const [allFormsData, setAllFormsData] = useState([]);
   const navigate = useNavigate();
   const [formPreviewDialog, setFormPreviewDialog] = useState(false);
@@ -26,6 +30,17 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     formPreviewDialogCurrentQuestions,
     setFormPreviewDialogCurrentQuestions,
   ] = useState([]);
+
+  const [joinedResponseData, setJoinedResponseData] = useState([]);
+  const [formResponsesDialog, setFormResponsesDialog] = useState(false);
+
+  const handleFormResponsesDiagOpen = () => {
+    setFormResponsesDialog(true);
+  };
+
+  const handleFormResponsesDiagClose = () => {
+    setFormResponsesDialog(false);
+  };
 
   const handleFormPreviewDiagOpen = () => {
     setFormPreviewDialog(true);
@@ -121,12 +136,107 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     return dueDate >= currentDate;
   };
 
+  const fetchAllUsers = () => {
+    const config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${apiUrl}/api/user/getAllUsers`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("quizzo_token")}`,
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log("all users", response.data);
+        if (response.data) {
+          setAllUsers(response.data.users);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        console.log("fetching users finished");
+      });
+  };
+
+  const fetchAllResponses = () => {
+    const config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${apiUrl}/api/response`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("quizzo_token")}`,
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log("all responses", response.data);
+        if (response.data) {
+          setAllResponses(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        console.log("fetching responses finished");
+      });
+  };
+
+  const handleShowResponses = (form) => {
+    console.log("Show responses for form:", form);
+    console.log("all responses", allResponses);
+    console.log("all users", allUsers);
+
+    const filteredResponses = allResponses.filter(
+      (response) => response.formId === form.formId
+    );
+    console.log("filtered responses", filteredResponses);
+
+    const joinedResponseData = filteredResponses.map((response) => {
+      const respondedUserDetails = allUsers.find(
+        (user) => user._id === response.userId
+      );
+      const formCreatedUserDetails = allUsers.find(
+        (user) => user._id === form.userId
+      );
+      return {
+        responseId: response._id,
+        responseCreatedAt: response.createdAt,
+        responseFormId: response.formId,
+        responseUserId: response.userId,
+        respondedUserDetails,
+        responseName: respondedUserDetails.name,
+        responseUserName: respondedUserDetails.userName,
+        responseUserEmail: respondedUserDetails.email,
+        formResponse: response.form_response,
+        formCreatedAt: form.createdAt,
+        formId: form.formId,
+        formName: form.formName,
+        formDuration: form.formDuration,
+        formDueDate: form.formDueDate,
+        formDescription: form.formDescription,
+        formOriginalQuestions: form.formQuestions,
+        formCreatedUserId: form.userId,
+        formCreatedUserDetails,
+      };
+    });
+    console.log("joined response data", joinedResponseData);
+    setJoinedResponseData(joinedResponseData);
+    handleFormResponsesDiagOpen();
+  };
+
   // Define the columns for the DataGrid, including the custom status column
   const columns = [
     {
       field: "formId",
       headerName: "ID",
-      width: 100,
+      width: 80,
       renderCell: (params) => (
         <p
           className="text-blue-800 underline cursor-pointer underline-offset-1"
@@ -136,14 +246,14 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
         </p>
       ),
     },
-    { field: "formName", headerName: "Form Name", width: 150 },
-    { field: "formDuration", headerName: "Duration", width: 100 },
-    { field: "formDueDate", headerName: "Due Date", width: 150 },
+    { field: "formName", headerName: "Form Name", width: 120 },
+    { field: "formDuration", headerName: "Duration", width: 80 },
+    { field: "formDueDate", headerName: "Due Date", width: 100 },
     // Custom status column indicating whether the form is active or not
     {
       field: "formStatus",
       headerName: "Status",
-      width: 150,
+      width: 100,
       renderCell: (params) => {
         // Determine the status of the form based on the due date
         const isActive = isFormActive(params.row.formDueDate);
@@ -157,24 +267,43 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     {
       field: "actions",
       headerName: "Actions",
-      width: 500,
+      width: 600,
       renderCell: (params) => (
         <div className="flex gap-5 items-center h-full">
           <CopyLinkButton
             link={`${uiUrl}/form/response/${params.row.formId}`}
           />
           <Button
-            onClick={() => handlePreviewQuestions(params.row)}
             variant="contained"
-            color="secondary"
+            onClick={() => handlePreviewQuestions(params.row)}
+            sx={{
+              backgroundColor: "#4338CA",
+              "&:hover": { backgroundColor: "#4338CA" },
+            }}
             size="small"
           >
             Preview Questions
           </Button>
           <Button
-            onClick={() => handleDelete(params.row.formId)}
             variant="contained"
-            color="error"
+            onClick={() => handleShowResponses(params.row)}
+            sx={{
+              backgroundColor: "#4338CA",
+              "&:hover": { backgroundColor: "#4338CA" },
+            }}
+            size="small"
+          >
+            Show Responses
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleDelete(params.row.formId)}
+            sx={{
+              backgroundColor: "white",
+              "&:hover": { backgroundColor: "white" },
+              border: "1px solid #4338CA",
+              color: "#4338CA",
+            }}
             size="small"
           >
             Delete
@@ -185,6 +314,8 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
   ];
 
   useEffect(() => {
+    fetchAllUsers();
+    fetchAllResponses();
     fetchAllFormsByUserId();
   }, []);
 
@@ -192,7 +323,7 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     <>
       <div className="flex flex-col gap-5 p-10">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">All Forms</h1>
+          <CompHeading heading="All Forms" />
           <p className="text-xs self-end italic">
             You have {allFormsData.length} forms
           </p>
@@ -273,6 +404,11 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <FormResponsesViewDialog
+        joinedResponseData={joinedResponseData}
+        formResponsesDialog={formResponsesDialog}
+        handleFormResponsesDiagClose={handleFormResponsesDiagClose}
+      />
     </>
   );
 };

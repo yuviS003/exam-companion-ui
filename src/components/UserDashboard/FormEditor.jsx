@@ -5,6 +5,8 @@ import EditQuesDialog from "../Dialogs/EditQuesDialog";
 import DeleteQuesDialog from "../Dialogs/DeleteQuesDialog";
 import FormEditorQuesCard from "../Cards/FormEditorQuesCard";
 import axios from "axios";
+import CompHeading from "../Heading/CompHeading";
+import PurpleContainedButton from "../Buttons/PurpleContainedButton";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -32,7 +34,8 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
     setFormData(updatedQuestions);
   };
 
-  const handleConfirmQuestionnaire = () => {
+  const handleConfirmQuestionnaire = (e) => {
+    e.preventDefault();
     setGlobalLoaderText("Creating your form...");
     setGlobalLoaderStatus(true);
     const payload = {
@@ -91,8 +94,11 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
 
   return (
     <>
-      <div className="flex flex-col gap-5 p-10">
-        <p className="text-3xl text-gray-700 font-medium">Form Editor</p>
+      <form
+        className="flex flex-col gap-5 p-10"
+        onSubmit={handleConfirmQuestionnaire}
+      >
+        <CompHeading heading="Form Editor" />
         <TextField
           placeholder="Form Name"
           label="Form Name"
@@ -100,6 +106,7 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
           InputLabelProps={{ shrink: true }}
           value={formName}
           onChange={(e) => setFormName(e.target.value)}
+          required
         />
         <div className="grid grid-cols-2 gap-5">
           <TextField
@@ -109,6 +116,7 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             InputLabelProps={{ shrink: true }}
             value={formDueDate}
             onChange={(e) => setFormDueDate(e.target.value)}
+            required
           />
           <TextField
             placeholder="Duration in minutes"
@@ -117,6 +125,7 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
             sx={{ backgroundColor: "whitesmoke" }}
             value={formDuration}
             onChange={(e) => setFormDuration(e.target.value)}
+            required
           />
         </div>
         <TextField
@@ -147,19 +156,12 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
           ))}
         </div>
         <div className="w-full flex items-center justify-end gap-5">
-          <Button variant="outlined" color="error" sx={{ width: 300 }}>
+          {/* <Button variant="outlined" color="error" sx={{ width: 300 }}>
             Back
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ width: 300 }}
-            color="success"
-            onClick={handleConfirmQuestionnaire}
-          >
-            Confirm
-          </Button>
+          </Button> */}
+          <PurpleContainedButton btnText="confirm" type="submit"/>
         </div>
-      </div>
+      </form>
       {/* Delete question dialog */}
       <DeleteQuesDialog
         openDeleteConfirmDialog={openDeleteConfirmDialog}
