@@ -35,6 +35,8 @@ const Tutorial = () => {
           controls
           width="700px"
           height="100%"
+          muted
+          playbackRate={1.5}
         />
       </div>
     </div>

@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import { FaDownload } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CompHeading from "../Heading/CompHeading";
+import { tutorialVid } from "../../assets/index"
 
 const formCreationSteps = [
   "Download the form template and fill it with your questions.",
@@ -108,10 +109,12 @@ const Overview = () => {
         </div>
         <div className="w-1/2 flex items-center justify-center">
           <ReactPlayer
-            url="path_to_your_video.mp4"
+            url={tutorialVid}
             controls
             width="500px"
             height="100%"
+            muted
+            playbackRate={1.5}
           />
         </div>
       </div>

@@ -4,5 +4,6 @@ import heroImg from "./robot.svg";
 import userAvatar from "./user-profile.png";
 import mishra from "./mishra.jpeg";
 import tickGif from "./Tickgif.gif";
+import tutorialVid from "./placeholder.mp4";
 
-export { lightLogo, darkLogo, heroImg, userAvatar, mishra, tickGif };
+export { lightLogo, darkLogo, heroImg, userAvatar, mishra, tickGif,tutorialVid };
