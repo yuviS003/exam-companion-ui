@@ -109,7 +109,11 @@ const Overview = () => {
         </div>
         <div className="w-1/2 flex items-center justify-center">
           <ReactPlayer
+<<<<<<< Updated upstream
             url={tutorialVid}
+=======
+            url="\src\assets\Timeline 1.mp4"
+>>>>>>> Stashed changes
             controls
             width="500px"
             height="100%"
