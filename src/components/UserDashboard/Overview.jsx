@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 import { FaDownload } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CompHeading from "../Heading/CompHeading";
-import { tutorialVid } from "../../assets/index"
+import { tutorialVid } from "../../assets/index";
 
 const formCreationSteps = [
   "Download the form template and fill it with your questions.",
@@ -109,11 +109,7 @@ const Overview = () => {
         </div>
         <div className="w-1/2 flex items-center justify-center">
           <ReactPlayer
-<<<<<<< Updated upstream
             url={tutorialVid}
-=======
-            url="\src\assets\Timeline 1.mp4"
->>>>>>> Stashed changes
             controls
             width="500px"
             height="100%"
