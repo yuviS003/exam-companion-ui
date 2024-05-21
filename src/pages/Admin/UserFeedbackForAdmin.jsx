@@ -138,6 +138,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { Box, Tooltip } from "@mui/material";
 import CompHeading from "../../components/Heading/CompHeading";
+import { enqueueSnackbar } from "notistack";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -200,6 +201,12 @@ const UserFeedbackForAdmin = ({
       })
       .catch((error) => {
         console.error("Error fetching user feedback:", error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);

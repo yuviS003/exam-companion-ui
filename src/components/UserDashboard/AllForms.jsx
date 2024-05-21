@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import CopyLinkButton from "../Buttons/CopyButton";
 import CompHeading from "../Heading/CompHeading";
 import FormResponsesViewDialog from "../Dialogs/FormResponsesViewDialog";
+import { enqueueSnackbar } from "notistack";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const uiUrl = import.meta.env.VITE_REACT_APP_UI_URL;
@@ -97,6 +98,12 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);
@@ -156,6 +163,12 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         console.log("fetching users finished");
@@ -182,6 +195,12 @@ const AllForms = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         console.log("fetching responses finished");

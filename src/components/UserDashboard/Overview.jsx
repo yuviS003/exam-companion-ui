@@ -5,6 +5,7 @@ import { FaDownload } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CompHeading from "../Heading/CompHeading";
 import { tutorialVid } from "../../assets/index";
+import { enqueueSnackbar } from "notistack";
 
 const formCreationSteps = [
   "Download the form template and fill it with your questions.",
@@ -74,6 +75,12 @@ const Overview = () => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       });
   };
 

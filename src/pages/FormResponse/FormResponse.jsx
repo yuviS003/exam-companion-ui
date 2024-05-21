@@ -73,6 +73,12 @@ const FormResponse = ({
       }
     } catch (error) {
       console.error("Error fetching form data:", error);
+      enqueueSnackbar(
+        error?.response?.data?.message || error?.message || "API ERROR",
+        {
+          variant: "error",
+        }
+      );
     } finally {
       // Hide loader
       setGlobalLoaderStatus(false);
@@ -157,6 +163,12 @@ const FormResponse = ({
           })
           .catch((error) => {
             console.log(error);
+            enqueueSnackbar(
+              error?.response?.data?.message || error?.message || "API ERROR",
+              {
+                variant: "error",
+              }
+            );
           })
           .finally(() => {
             setGlobalLoaderStatus(false);
@@ -205,6 +217,12 @@ const FormResponse = ({
       })
       .catch((error) => {
         console.error("Error fetching response data:", error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
         setGlobalLoaderStatus(false);
       });
   };

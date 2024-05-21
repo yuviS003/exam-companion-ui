@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import CopyLinkButton from "../../components/Buttons/CopyButton";
 import CompHeading from "../../components/Heading/CompHeading";
 import PurpleContainedButton from "../../components/Buttons/PurpleContainedButton";
+import { enqueueSnackbar } from "notistack";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const uiUrl = import.meta.env.VITE_REACT_APP_UI_URL;
@@ -82,6 +83,12 @@ const AllFormsForAdmin = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);

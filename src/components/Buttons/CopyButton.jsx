@@ -17,6 +17,12 @@ const CopyLinkButton = ({ link }) => {
     } catch (error) {
       // Handle any errors that occur while copying
       console.error("Failed to copy link:", error);
+      enqueueSnackbar(
+        error?.response?.data?.message || error?.message || "API ERROR",
+        {
+          variant: "error",
+        }
+      );
     }
   };
 

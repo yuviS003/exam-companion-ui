@@ -14,6 +14,7 @@ import axios from "axios";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useNavigate } from "react-router-dom";
 import CompHeading from "../../components/Heading/CompHeading";
+import { enqueueSnackbar } from "notistack";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -97,6 +98,12 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.error("Error fetching form information:", error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);
@@ -133,6 +140,12 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.error("Error fetching responses:", error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);
@@ -210,6 +223,12 @@ const ViewFormResponses = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.error("Error fetching form information:", error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);

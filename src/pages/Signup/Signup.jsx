@@ -4,6 +4,7 @@ import Logo from "../../components/Logo/Logo";
 import axios from "axios";
 import { useState } from "react";
 import Footer from "../../components/Footer/Footer";
+import { enqueueSnackbar } from "notistack";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -56,6 +57,12 @@ const Signup = ({
       // Add any additional logic or state updates based on the response if needed
     } catch (error) {
       console.error(error);
+      enqueueSnackbar(
+        error?.response?.data?.message || error?.message || "API ERROR",
+        {
+          variant: "error",
+        }
+      );
       // Handle errors appropriately
     } finally {
       // Reset loader text and status after API call

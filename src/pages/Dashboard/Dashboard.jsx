@@ -18,6 +18,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import CommentIcon from "@mui/icons-material/Comment";
 import QuickreplyIcon from "@mui/icons-material/Quickreply";
 import systemAdminEmails from "../../../system-admin-users.json";
+import { enqueueSnackbar } from "notistack";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -68,6 +69,12 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.error("Error uploading file:", error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);
@@ -194,8 +201,8 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
         )}
       </div>
       <div className={`ml-[270px] bg-[#E5E7EB] w-full flex flex-col`}>
-        <div className="w-full sticky z-[100] top-0 right-0 px-4 py-3 bg-white flex items-center justify-between border-b-[5px] border-b-[#4338CA]">
-          <TextField
+        <div className="w-full sticky z-[100] top-0 right-0 px-4 py-3 bg-white flex items-center justify-end border-b-[5px] border-b-[#4338CA]">
+          {/* <TextField
             size="small"
             variant="outlined"
             placeholder="Search your form"
@@ -206,7 +213,7 @@ const Dashboard = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
                 </InputAdornment>
               ),
             }}
-          />
+          /> */}
           <IconButton
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}

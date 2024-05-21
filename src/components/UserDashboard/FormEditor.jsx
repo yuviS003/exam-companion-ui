@@ -7,6 +7,7 @@ import FormEditorQuesCard from "../Cards/FormEditorQuesCard";
 import axios from "axios";
 import CompHeading from "../Heading/CompHeading";
 import PurpleContainedButton from "../Buttons/PurpleContainedButton";
+import { enqueueSnackbar } from "notistack";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -70,6 +71,12 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(
+          error?.response?.data?.message || error?.message || "API ERROR",
+          {
+            variant: "error",
+          }
+        );
       })
       .finally(() => {
         setGlobalLoaderStatus(false);
@@ -159,7 +166,7 @@ const FormEditor = ({ setGlobalLoaderText, setGlobalLoaderStatus }) => {
           {/* <Button variant="outlined" color="error" sx={{ width: 300 }}>
             Back
           </Button> */}
-          <PurpleContainedButton btnText="confirm" type="submit"/>
+          <PurpleContainedButton btnText="confirm" type="submit" />
         </div>
       </form>
       {/* Delete question dialog */}
